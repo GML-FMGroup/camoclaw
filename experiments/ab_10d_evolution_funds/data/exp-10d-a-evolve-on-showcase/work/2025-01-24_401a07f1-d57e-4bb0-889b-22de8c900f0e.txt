@@ -1,0 +1,9 @@
+I have written a 500-word editorial titled "Artificial Intelligence is Shrinking Scientific Horizons. Here's How to Fix It." The editorial examines a recent Nature study revealing a paradox: AI tools boost individual scientists' careers (3x more publications, 4.84x more citations) but narrow collective scientific inquiry (4.63% reduction in topics studied, 22% decrease in researcher engagement). 
+
+The piece follows Guardian editorial style with a headline, standfirst, and clear narrative structure. It presents a fact-based opinion arguing that while AI accelerates research in data-rich domains, it risks neglecting crucial but data-poor areas of science. The editorial calls for funding agencies, journals, and institutions to deliberately incentivize exploratory research in underserved domains.
+
+Two primary reference stories are linked:
+1. Hao et al.'s original Nature study on AI's impact on scientific research (doi:10.1038/s41586-025-09922-y)
+2. Nature's accompanying commentary by Veda C. Storey (doi:10.1038/d41586-025-04092-3)
+
+A third reference to a Nature editorial on AI governance provides policy context. A fact-check section for sub-editors includes specific statistics from the study methodology.

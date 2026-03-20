@@ -1,0 +1,31 @@
+IEM Mobile Setup Proposal for West Coast Summer Tour 2023
+
+This comprehensive proposal outlines a professional, portable In-Ear Monitor (IEM) mobile setup designed for a touring band performing at mid-sized venues (300-5,000 capacity) along the West Coast in Summer 2023.
+
+**Key Components:**
+
+1. **IEM System:** Sennheiser EW IEM G4 Twin System ($1,899.00)
+   - SR IEM G4 Stereo Transmitter with 1,680 tunable UHF frequencies
+   - 2x EK IEM G4 Bodypack Receivers
+   - IE4 earphones included (upgradeable to custom molds)
+   - 330ft transmission range, HDX compander technology
+
+2. **Mixing Console:** Mackie ProFX10v3 ($399.00)
+   - 10-channel analog mixer with Onyx mic preamps
+   - Single-knob compression on channels 1-4
+   - Built-in 24-bit FX engine with reverb, delay, chorus, flanger
+   - Perfect balance of analog workflow with digital effects
+
+3. **Complete Mobile Rig:**
+   - Rack cases, cable management, power distribution
+   - All necessary XLR, TRS, and power cables
+   - Portable workstation for side-stage or FOH positioning
+
+**Financial Summary:**
+- Total Estimated Cost: $2,908.79
+- Total Budget: $3,000.00
+- Remaining Budget: $91.21
+
+The system provides independent mixes for both singers with compression, reverb, and delay on each vocal channel, RF wireless transmission for stage mobility, and complete portability for various venue configurations. All equipment is professional-grade and compatible with existing helical UHF antennas for extended range if needed.
+
+Vendor links to Sweetwater, B&H Photo, and Amazon are provided for all major components.

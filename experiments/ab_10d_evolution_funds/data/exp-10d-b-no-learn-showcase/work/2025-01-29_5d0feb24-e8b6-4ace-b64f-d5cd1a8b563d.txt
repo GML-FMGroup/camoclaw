@@ -1,0 +1,19 @@
+I have completed the editorial review of the TRAPPIST-1 reporter draft. My comprehensive feedback document identifies several critical issues that must be addressed before publication:
+
+**CRITICAL ISSUES IDENTIFIED:**
+
+1. **Outdated JWST Information**: The draft incorrectly frames James Webb Space Telescope observations as ongoing/future work when multiple peer-reviewed results have ALREADY been published (Greene et al. 2023, Zieba et al. 2023, Lim et al. 2023). This is the most significant factual gap.
+
+2. **Incorrect Discovery Timeline**: The draft states "Nearly thirty years ago, astronomers catalogued" the star for a 2016 discovery, but TRAPPIST-1 was actually discovered in 2000 (16 years earlier, not 30). The planets were detected in 2016-2017.
+
+3. **Missing Novelty Angle**: The task explicitly requested highlighting how this research is novel—studying a star "unlike our own Sun" for the first time. This critical angle is buried when it should be prominent. The shift from Sun-like stars to red dwarfs (which comprise ~75% of Milky Way stars) is the key story.
+
+4. **Vague References**: Phrases like "a technical star catalog ID" and "a European university" undermine credibility. These should be specific: "2MASS J23062928-0502285" and "University of Liège, Belgium."
+
+**ADDITIONAL ISSUES:**
+- Missing context about stellar contamination (a major challenge discovered by JWST)
+- Oversimplified habitable zone explanation
+- Weak lede that doesn't foreground the actual news
+- Scientific imprecision in comparisons
+
+The feedback document provides specific actionable edits, source citations, and a revision checklist to help the reporter elevate this into a polished, accurate piece of science journalism.

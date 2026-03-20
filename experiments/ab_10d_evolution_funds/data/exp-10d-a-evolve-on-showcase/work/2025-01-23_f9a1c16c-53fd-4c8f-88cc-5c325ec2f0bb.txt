@@ -1,0 +1,16 @@
+I have created a professional one-page visual stage plot PDF for the nationally touring band. The stage plot includes:
+
+**Band Setup (Landscape, Front of Stage at Bottom):**
+- **Stage Right**: Bass player with amp, speech mic, accordion DI, and acoustic guitar DI; Vox1 with vocal mic and IEM split
+- **Center Stage**: Drummer with 4-piece kit, vocal mic, and wedge at 10 o'clock position (hearing Vox1+Vox2)
+- **Stage Left**: Vox2 with vocal mic and IEM split; Guitar player with amp and wedge
+
+**Equipment Icons:** Custom-designed graphic icons representing microphones, wedges, amps, DI boxes, IEM splits (shown as small boxes with red dots), and the drum kit.
+
+**Input List (1-6):** Vox1 Vocal, Vox2 Vocal, Drums Vox, Bass Speech Mic, Accordion DI, Acoustic Guitar DI
+
+**Output List (1-7, numbered counterclockwise from stage right):** Vox1 IEM (XLR feed), Vox2 IEM (XLR feed), Wedge 1 (Vox1), Wedge 2 (Vox2), Wedge 3 (Bass), Wedge 4 (Guitar), Wedge 5 (Drums - Vox1+Vox2)
+
+**Legend:** Includes symbols for Mic, Amp, Wedge, DI Box, and IEM Split for easy reference by venue staff.
+
+The stage plot is designed to advance to each venue before load-in, showing all onstage equipment, monitoring needs, and signal routing clearly for the A/V and FOH teams.

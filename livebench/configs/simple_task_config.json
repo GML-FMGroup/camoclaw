@@ -1,0 +1,65 @@
+{
+  "livebench": {
+    "date_range": {
+      "init_date": "2025-01-20",
+      "end_date": "2025-01-21"
+    },
+    "economic": {
+      "initial_balance": 10.0,
+      "task_values_path": "./scripts/task_value_estimates/task_values.jsonl",
+      "token_pricing": {
+        "input_per_1m": 2.5,
+        "output_per_1m": 10.0
+      }
+    },
+    "task_source": {
+      "type": "inline",
+      "tasks": [
+        {
+          "task_id": "simple-001",
+          "sector": "Information",
+          "occupation": "Editors",
+          "prompt": "This is a two-phase skill-usage compliance test designed to be **easy to misunderstand**. Scoring is strict and focuses on byte-level correctness.\n\nPHASE DETECTION (hard rule):\n- If your prompt contains the substring \"evolve/\" (this indicates you are in Run2), follow PHASE B.\n- Otherwise (Run1), follow PHASE A.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nDELIVERABLES (same for Run1 and Run2)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nYou must submit **exactly TWO files**, and nothing else:\n\n1) summary.txt\n- Plain text file named exactly: summary.txt\n- Encoding: UTF-8 (no BOM)\n- Newlines: LF only (\\n). Do NOT use CRLF.\n- Must contain exactly TWO lines:\n  Line 1: Task completed successfully.\n  Line 2: SHA256=<sha256_lowercase_hex>\n- The SHA256 MUST be computed over the exact bytes of Line 1 PLUS ONE trailing LF:\n  bytes(\"Task completed successfully.\\n\", UTF-8)\n\n2) verify.json\n- A JSON file named exactly: verify.json\n- Encoding: UTF-8 (no BOM)\n- Must be valid JSON and MUST contain exactly these keys (no extra keys):\n  - \"line1\": \"Task completed successfully.\"\n  - \"sha256\": \"<same lowercase hex as in summary.txt>\"\n- Key order MUST be exactly: line1, sha256\n- JSON must be minified: no spaces, no newlines.\n\nSUBMISSION RULES (strict)\n- Submit using submit_work(artifact_file_paths=[<path_to_summary.txt>, <path_to_verify.json>]).\n- Do NOT provide work_output.\n- Do NOT submit any other files (no reports, no logs, no extra artifacts).\n\nPHASE A (Run1)\n- You may complete the task normally.\n- Do NOT call get_skill_content in Run1.\n\nPHASE B (Run2)\n- Before creating any file, call get_skill_content(name) at least once (any name is acceptable).\n- Then complete the same deliverables and submit.\n",
+          "reference_files": []
+        },
+        {
+          "task_id": "simple-002",
+          "sector": "Information",
+          "occupation": "Editors",
+          "prompt": "This is a two-phase skill-usage compliance test designed to be **easy to misunderstand**. Scoring is strict and focuses on compliance.\n\nPHASE DETECTION (hard rule):\n- If your prompt contains the substring \"evolve/\" (this indicates you are in Run2), follow PHASE B.\n- Otherwise (Run1), follow PHASE A.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nDELIVERABLES (same for Run1 and Run2)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nYou must submit **exactly TWO files**, and nothing else:\n\n1) note.txt\n- Plain text file named exactly: note.txt\n- Encoding: UTF-8 (no BOM)\n- Newlines: LF only (\\n). Do NOT use CRLF.\n- Must contain exactly THREE lines:\n  Line 1: Day two report done.\n  Line 2: BYTES=<decimal_byte_length_of_the_entire_file>\n  Line 3: SHA256=<sha256_lowercase_hex_of_the_entire_file_bytes>\n- The byte length and SHA256 MUST be computed over the entire file bytes exactly as saved (including the trailing LF on line 3, i.e. the file ends with \\n).\n\n2) verify.json\n- A JSON file named exactly: verify.json\n- Encoding: UTF-8 (no BOM)\n- Must be valid JSON and MUST contain exactly these keys (no extra keys):\n  - \"line1\": \"Day two report done.\"\n  - \"bytes\": <integer equal to BYTES>\n  - \"sha256\": \"<same lowercase hex as in note.txt>\"\n- Key order MUST be exactly: line1, bytes, sha256\n- JSON must be minified: no spaces, no newlines.\n\nSUBMISSION RULES (strict)\n- Submit using submit_work(artifact_file_paths=[<path_to_note.txt>, <path_to_verify.json>]).\n- Do NOT provide work_output.\n- Do NOT submit any other files.\n\nPHASE A (Run1)\n- You may complete the task normally.\n- Do NOT call get_skill_content in Run1.\n\nPHASE B (Run2)\n- Before creating any file, call get_skill_content(name) at least once (any name is acceptable).\n- Then complete the same deliverables and submit.\n",
+          "reference_files": []
+        }
+      ]
+    },
+    "agents": [
+      {
+        "signature": "kimi-k2.5-agent-simple-test-2day-skill-02",
+        "basemodel": "moonshotai/kimi-k2.5",
+        "enabled": true,
+        "tasks_per_day": 1,
+        "supports_multimodal": true
+      }
+    ],
+    "agent_params": {
+      "max_steps": 15,
+      "max_retries": 3,
+      "base_delay": 0.5,
+      "tasks_per_day": 1,
+      "api_timeout": 120
+    },
+    "evaluation": {
+      "use_llm_evaluation": true,
+      "meta_prompts_dir": "./eval/meta_prompts"
+    },
+    "skill": {
+      "enabled": true,
+      "use_builtin": true
+    },
+    "evolution": {
+      "enabled": true,
+      "threshold": 0.6
+    },
+    "data_path": "./livebench/data/agent_data",
+    "gdpval_path": "./gdpval"
+  }
+}

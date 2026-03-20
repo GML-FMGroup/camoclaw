@@ -1,0 +1,27 @@
+I have created a comprehensive one-page visual stage plot PDF for the touring band. The document includes:
+
+**Stage Layout (Landscape, Front of Stage at Bottom):**
+- Bass (Stage Right) with bass amp, speech mic, accordion DI, acoustic DI, and Wedge 5
+- Vox1 (Stage Right) with vocal mic (XLR split to IEM 1), IEM transmitter, and Wedge 1
+- Vox2 (Stage Left) with vocal mic (XLR split to IEM 2), IEM transmitter, and Wedge 2  
+- Guitar (Stage Left) with guitar amp and Wedge 4
+- Drums (Center Upstage) with 4-piece kit, vocal mic, and Wedge 3 at 10 o'clock position
+
+**Input List (6 channels):**
+1. Vox1 Vocal - SM58 (split to IEM 1)
+2. Vox2 Vocal - SM58 (split to IEM 2)
+3. Drums Vocal - SM58
+4. Bass Speech - SM58
+5. Bass Accordion - DI Box
+6. Bass Acoustic - DI Box
+
+**Output List (7 outputs, numbered counterclockwise from Stage Right):**
+1. IEM 1 - Vox1 (Vox1 Mix)
+2. IEM 2 - Vox2 (Vox2 Mix)
+3. Wedge 1 - Vox1 (Vox1 Vocal)
+4. Wedge 2 - Vox2 (Vox2 Vocal)
+5. Wedge 3 - Drums (Vox1+Vox2+Drums)
+6. Wedge 4 - Guitar (Guitar)
+7. Wedge 5 - Bass (Bass Fill)
+
+All graphic icons are included: microphones (circles with X), DI boxes (rectangles), amps (large rectangles), IEM transmitters (green squares), monitor wedges (blue triangles), and drum kit diagram. A legend explains all symbols. The stage plot is ready for venue advance documentation.

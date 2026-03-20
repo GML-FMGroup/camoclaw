@@ -1,0 +1,15 @@
+I have created a 500-word editorial for a science magazine on the topic of ocean darkening, titled "Our oceans are turning dark: the climate crisis we can no longer see." 
+
+The editorial is based on recent research published in Global Change Biology (Davies et al., 2025) that reveals over 20% of the global ocean has darkened between 2003-2022, shrinking photic zones by up to 100 metres in some areas. This phenomenon threatens marine biodiversity and the ocean's ability to produce oxygen and regulate climate.
+
+The piece follows Guardian style guide conventions with:
+- A compelling headline and standfirst
+- Clear narrative structure with opening hook, problem explanation, root causes, and implications
+- Opinion backed by fact-checked reporting from Nature, Nature Communications, and The Guardian
+- A strong call to action urging policymakers to accelerate marine protected areas and reduce emissions
+- Reference links provided for sub-editor verification
+
+Key sources cited:
+1. Davies, T.W. et al. (2025). "Darkening of the Global Ocean." Global Change Biology
+2. Carr, P. et al. (2025). "Planet's darkening oceans pose threat to marine life, scientists say." The Guardian, 27 May 2025
+3. Nature Communications research on marine climate refugia showing 70% conservation gap

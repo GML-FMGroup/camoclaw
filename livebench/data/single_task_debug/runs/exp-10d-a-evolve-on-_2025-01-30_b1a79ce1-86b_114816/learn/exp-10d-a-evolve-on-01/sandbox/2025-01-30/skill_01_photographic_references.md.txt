@@ -1,0 +1,126 @@
+# Skill: Using Photographic Reference Images in Production Moodboards
+
+type: technical
+
+## When to Use
+- Creating moodboards for film, video, or music video production
+- Preparing visual references for directors, cinematographers, production designers, costume designers, or art departments
+- Communicating specific visual aesthetics to a production team
+- Any deliverable that requires conveying concrete visual direction rather than abstract concepts
+
+## One-Line Summary
+Always use actual photographic/film still references instead of abstract shapes or color blocks when creating production moodboards—these are the only elements that can effectively communicate specific visual direction to a production team.
+
+## Main Body
+
+### The Critical Distinction
+
+**Production moodboards serve a functional purpose**: they must provide specific, actionable visual references that departments can use to make concrete decisions about:
+- Costume design (fabric textures, silhouettes, color choices)
+- Set design (architectural styles, furniture, props)
+- Lighting setups (key light positions, contrast ratios, color temperatures)
+- Camera work (framing, lens choices, movement styles)
+- Color grading targets
+
+**Abstract elements (rectangles, circles, color blocks) CANNOT serve this purpose.** Only photographic references can show:
+- How light falls on fabric
+- The texture of materials
+- Specific architectural details
+- Exact color relationships in real-world contexts
+- Composition and framing techniques
+
+### Required Reference Categories
+
+For any production moodboard, include photographic references for:
+
+1. **Cinematography & Lighting**
+   - Film stills showing desired lighting quality (hard vs. soft, high-key vs. low-key)
+   - Examples of contrast ratios and shadow density
+   - Reference for color temperature and mood
+
+2. **Costume & Wardrobe**
+   - Historical or contemporary clothing photography
+   - Fabric texture close-ups
+   - Full-body shots showing silhouette and drape
+
+3. **Set & Production Design**
+   - Interior/exterior architecture photography
+   - Furniture and prop reference images
+   - Location scouting photos
+
+4. **Color & Texture**
+   - Real-world examples showing color relationships
+   - Material texture photography (metal, fabric, stone, etc.)
+
+### Sources for Quality Reference Images
+
+- **Film Grab** (film-grab.com): High-quality film stills
+- **Shotdeck**: Extensive film scene library
+- **Pinterest**: Curated visual collections
+- **Instagram**: Photographer portfolios
+- **Art/Photography Books**: Scan relevant pages
+- **Previous Production Stills**: From comparable projects
+
+### What to Avoid
+
+❌ NEVER use:
+- Solid color rectangles as "mood" elements
+- Geometric shapes (circles, triangles) to represent concepts
+- Abstract gradients without photographic context
+- Placeholder graphics labeled as "reference"
+
+✅ ALWAYS use:
+- Actual film stills from relevant movies
+- Professional photography
+- Location scout photos
+- Historical reference images
+- Material texture photography
+
+## Examples
+
+### Example 1: Baroque Masquerade Music Video
+**Incorrect (Abstract - 0/10 usability):**
+- Red rectangle labeled "Passion"
+- Gold circle labeled "Opulence" 
+- Brown square labeled "Victorian"
+
+**Correct (Photographic - 10/10 usability):**
+- Film still from "Eyes Wide Shut" showing masquerade ball lighting
+- Alexander McQueen runway photography showing dramatic silhouettes
+- Gothic cathedral interior showing architectural details
+- Victorian portrait photography showing costume textures
+- Reference still showing chiaroscuro lighting technique
+
+### Example 2: 1970s Period Piece
+**Incorrect:**
+- Orange color swatch labeled "70s vibe"
+- Pattern swatch without context
+
+**Correct:**
+- Film still from "Boogie Nights" or "Dazed and Confused"
+- 1970s Life Magazine photography
+- Reference photos of actual 70s interiors
+- Costume reference from period films
+
+## Code Demo
+
+N/A - This is a content strategy skill. Implementation would involve image sourcing and curation rather than code generation.
+
+## Quality Checklist
+
+Before finalizing any production moodboard, verify:
+- [ ] Every "reference" is an actual photograph or film still
+- [ ] No abstract shapes or color blocks are used as references
+- [ ] Each image could be shown to a department head for actionable direction
+- [ ] Images represent real-world achievable aesthetics
+- [ ] References span all relevant departments (costume, set, lighting, camera)
+
+## Common Failure Pattern (From Run#1)
+
+The critical failure in Run#1 was substituting required photographic reference images with abstract placeholder graphics. A moodboard with abstract geometric shapes cannot function for production planning because:
+- Costume designers cannot source fabric from a color rectangle
+- Gaffers cannot light a scene based on a shape
+- Production designers cannot build sets from color blocks
+- The director cannot communicate specific visual intentions
+
+**Remember: A moodboard is a communication tool, not an art piece. Function over form.**

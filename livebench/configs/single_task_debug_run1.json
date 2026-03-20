@@ -1,0 +1,52 @@
+{
+  "livebench": {
+    "date_range": {
+      "init_date": "2025-01-15",
+      "end_date": "2025-01-15"
+    },
+    "economic": {
+      "initial_balance": 10.0,
+      "task_values_path": "./scripts/task_value_estimates/task_values.jsonl",
+      "token_pricing": {
+        "input_per_1m": 2.5,
+        "output_per_1m": 10.0
+      }
+    },
+    "agents": [
+      {
+        "signature": "debug-agent",
+        "basemodel": "moonshotai/kimi-k2.5",
+        "enabled": true,
+        "tasks_per_day": 1,
+        "supports_multimodal": true
+      }
+    ],
+    "agent_params": {
+      "max_steps": 25,
+      "max_retries": 3,
+      "base_delay": 0.5,
+      "tasks_per_day": 1,
+      "api_timeout": 600
+    },
+    "evaluation": {
+      "use_llm_evaluation": true,
+      "meta_prompts_dir": "./eval/meta_prompts"
+    },
+    "skill": {
+      "enabled": true
+    },
+    "data_path": "./livebench/data/agent_data_debug/run1",
+    "task_source": {
+      "type": "inline",
+      "tasks": [
+        {
+          "task_id": "debug-1",
+          "sector": "Software",
+          "occupation": "Software Developers",
+          "prompt": "This is a single-task sample for debugging the skill self-evolution loop (Run#1 as baseline; Run#2 compares after injecting skills when needed).\n\n## Deliverables\n- **Required**: Complete the task's required deliverable(s) as stated in the \"Original GDPVal task\" section below (e.g. the revised quotation file). Evaluation is based on those task deliverables only.\n- **Optional**: You may produce a short Markdown report (e.g. `report.md`) to document your strategy, tool usage, and conclusions for debugging/learning; it is not a required submission for scoring.\n\n## Notes\n- Use `create_file` or `execute_code_sandbox` for artifacts, then `submit_work` with the correct paths; evaluation focuses on the task's required deliverable(s)."
+        }
+      ]
+    }
+  }
+}
+

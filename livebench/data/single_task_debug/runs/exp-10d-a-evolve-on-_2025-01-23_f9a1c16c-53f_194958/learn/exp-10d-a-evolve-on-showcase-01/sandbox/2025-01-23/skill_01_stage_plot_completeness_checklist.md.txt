@@ -1,0 +1,165 @@
+# Skill: Stage Plot Visual Completeness Checklist
+
+type: strategy
+
+## When to Use
+
+- Creating or reviewing any stage plot for touring advance documentation
+- Before submitting stage plots to venues, bookers, or production teams
+- When updating an existing stage plot with new equipment or band members
+- Any time you modify the input list or output list and need to sync the visual diagram
+- Quality assurance for touring documentation packages
+
+## One-Line Summary
+
+Every item listed in the input list and output list MUST have a corresponding visual icon on the stage plot diagram—no exceptions.
+
+## Main Body
+
+### The Completeness Rule
+
+The golden rule of stage plot creation: **If it appears in a list, it must appear in the picture.** Venue staff use the stage plot during load-in to verify physical placement of every piece of equipment. Missing icons cause confusion, delays, and potential safety issues.
+
+### Pre-Submission Checklist
+
+Use this checklist before finalizing any stage plot:
+
+#### Input List → Visual Verification
+- [ ] Count total inputs in the Input List
+- [ ] Count microphone icons on the stage plot
+- [ ] Verify: Microphone count in list = Microphone icons on plot
+- [ ] Count DI box icons on the stage plot
+- [ ] Verify: DI count in list = DI icons on plot
+- [ ] Count any other input sources (playback devices, wireless receivers, etc.)
+- [ ] Verify: Each has a corresponding visual representation
+
+#### Output List → Visual Verification
+- [ ] Count total outputs in the Output List (monitors, IEMs, sends, etc.)
+- [ ] Count monitor wedge icons (usually triangles) on the stage plot
+- [ ] Verify: Wedge count in list = Wedge icons on plot
+- [ ] Count IEM transmitter icons on the stage plot
+- [ ] Verify: IEM count in list = IEM icons on plot
+- [ ] Count any other output devices (subwoofers, side fills, etc.)
+- [ ] Verify: Each has a corresponding visual representation
+
+#### Equipment List → Visual Verification
+- [ ] Count amplifiers listed
+- [ ] Count amplifier icons (rectangles) on the stage plot
+- [ ] Verify: Amp count = Amp icons
+- [ ] Count drum kit components
+- [ ] Verify: Each drum component has appropriate representation
+- [ ] Count keyboards/instruments requiring power or audio connections
+- [ ] Verify: Each appears on the plot
+
+### Common Omission Patterns to Watch For
+
+1. **Vocalist monitors**: Often listed as outputs but forgotten on the plot because the vocalists "use IEMs"—if they have ANY monitor needs (even a backup wedge), it must appear
+2. **Drummer monitoring**: Drummers using wedges instead of IEMs are frequently omitted
+3. **Secondary instruments**: Accordion, acoustic guitar, or specialty instruments added to a primarily electric band
+4. **Talk mics**: Speech microphones for non-singing band members
+5. **Spare/backups**: Any mic labeled "spare" or "backup" in lists
+
+### Cross-Reference Method
+
+For complex setups with many inputs/outputs:
+
+1. Assign each item a unique identifier (e.g., Wedge 1, Wedge 2, Mic 1, Mic 2)
+2. Create a three-column table:
+   - Column 1: Item ID from lists
+   - Column 2: Location on stage
+   - Column 3: Checkmark when icon placed on plot
+3. Work through each item systematically
+4. Final verification: Count checkmarks = total items in lists
+
+### Legend Requirements
+
+Every stage plot must include a legend that:
+- Defines each symbol used (microphones, DIs, wedges, amps, IEMs, etc.)
+- Uses industry-standard conventions when possible (circles with X for mics, triangles for wedges, rectangles for amps)
+- Is positioned prominently (typically top corner or side margin)
+
+## Examples
+
+### Example 1: The Vocal Monitor Omission (Common Failure)
+
+**Scenario**: A band has 2 vocalists using IEM systems but also wants their vocals in front monitors for "stage wash" or backup.
+
+**Input List**:
+- Ch 1: Vox 1 (Lead Singer)
+- Ch 2: Vox 2 (Harmony)
+
+**Output List**:
+- Aux 1: Wedge 1 (Vox 1) ← vocalist's personal wedge
+- Aux 2: Wedge 2 (Vox 2) ← vocalist's personal wedge
+- Aux 3: Wedge 3 (Drummer)
+
+**Common Error**: Placing only Wedge 3 (drummer) on the plot because "the vocalists use IEMs for their main monitoring."
+
+**Correct Approach**: All three wedges (Wedge 1, Wedge 2, Wedge 3) must appear as triangle icons on the stage plot, positioned near their respective performers.
+
+### Example 2: The Multi-Instrumentalist Setup
+
+**Scenario**: A bass player also plays accordion and acoustic guitar on some songs.
+
+**Input List**:
+- Ch 5: Bass DI
+- Ch 6: Accordion DI
+- Ch 7: Acoustic Guitar DI
+- Ch 8: Bass Player Talk Mic
+
+**Output List**:
+- Aux 4: Wedge 4 (Bass Player)
+
+**Required Visual Elements**:
+- 3 DI box icons (bass, accordion, acoustic)
+- 1 microphone icon (talk mic)
+- 1 wedge icon (Wedge 4)
+- 1 bass amp icon (if applicable)
+
+**Verification**: Count = 6 items in lists, 6 icons on plot.
+
+## Code Demo
+
+N/A - This is a strategy/process skill. Implementation is through manual/visual verification.
+
+However, you can use this Python snippet as a verification helper:
+
+```python
+# Verification helper script
+def verify_completeness(input_items, output_items, plot_icons):
+    """
+    Check that all list items have corresponding plot icons.
+    
+    Args:
+        input_items: List of input descriptors
+        output_items: List of output descriptors  
+        plot_icons: Dict mapping icon types to counts on plot
+    
+    Returns:
+        Tuple of (is_complete, missing_items)
+    """
+    all_items = input_items + output_items
+    missing = []
+    
+    for item in all_items:
+        # Logic to match item to icon type and verify presence
+        if not has_corresponding_icon(item, plot_icons):
+            missing.append(item)
+    
+    return len(missing) == 0, missing
+
+def has_corresponding_icon(item, plot_icons):
+    # Example matching logic
+    item_lower = item.lower()
+    if 'wedge' in item_lower or 'monitor' in item_lower:
+        return plot_icons.get('wedges', 0) >= count_item_occurrences(item_lower)
+    elif 'mic' in item_lower or 'microphone' in item_lower:
+        return plot_icons.get('microphones', 0) >= count_item_occurrences(item_lower)
+    elif 'di' in item_lower:
+        return plot_icons.get('di_boxes', 0) >= count_item_occurrences(item_lower)
+    return True  # Assume other items are okay
+```
+
+## Key Takeaway
+
+**When in doubt, draw it out.** If an item consumes a channel, requires power, or takes up physical space on stage, it belongs on the stage plot. The venue crew cannot read your mind—they need the complete visual reference to execute a successful load-in.

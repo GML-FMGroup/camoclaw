@@ -1,0 +1,38 @@
+# SelfEvolvingClaw 可运行依赖
+# Python >= 3.10
+
+# Core
+fastapi>=0.104.0
+uvicorn>=0.24.0
+websockets>=12.0
+fastmcp>=0.2.0
+langchain>=0.1.0
+langchain-openai>=0.0.2
+langchain-mcp-adapters>=0.1.0
+langgraph>=0.2.0
+openai>=1.0.0
+httpx>=0.25.0
+
+# Data
+pandas>=2.0.0
+pyarrow>=14.0.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+aiofiles>=23.2.1
+
+# 文档/表格/图像（评估与产出）
+matplotlib>=3.8.0
+python-docx>=1.0.0
+python-pptx>=0.6.21
+reportlab>=4.0.0
+openpyxl>=3.1.0
+xlsxwriter>=3.1.0
+pdf2image>=1.16.0
+Pillow>=10.0.0
+PyPDF2>=3.0.0
+
+# 网页搜索（Learn / search_web）
+tavily-python>=0.3.0
+
+# 代码沙箱（execute_code_sandbox，可选）
+e2b-code-interpreter>=2.0.0

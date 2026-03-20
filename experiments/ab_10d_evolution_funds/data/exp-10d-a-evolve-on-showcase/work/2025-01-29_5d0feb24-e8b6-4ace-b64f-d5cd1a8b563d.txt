@@ -1,0 +1,31 @@
+Editorial review completed for the TRAPPIST-1 reporter draft. I've created a detailed Word document with tracked changes and comments that addresses the following key areas:
+
+**Major Findings:**
+
+1. **Scientific Accuracy Issues:**
+   - The star was catalogued in 1999 (not "nearly thirty years ago" from 2024)
+   - The star is Jupiter-sized (~0.12 solar radii), not "ten times smaller than our Sun"
+   - Missing credit to lead researcher Michaël Gillon and University of Liège
+   - Need to specify the star designation: 2MASS J23062928-0502285
+
+2. **Missing Key Information:**
+   - Distance to system: ~40 light-years
+   - Three planets (e, f, g) orbit in the habitable zone
+   - Recent JWST atmospheric analysis results showing no thick CO2 atmosphere on TRAPPIST-1c
+   - The significance of studying non-Sun-like stars: M-dwarfs comprise ~75% of all stars in the Milky Way
+
+3. **Novel Research Angle (Critical for Assignment):**
+   - The story needs to emphasize that this research is novel because it demonstrates rocky planets can form around ultracool dwarfs, vastly expanding the search space for habitable worlds beyond just Sun-like stars
+   - This opens up the most common types of stars for habitability studies
+
+4. **Specificity Improvements:**
+   - Named telescopes: James Webb Space Telescope (JWST) and Extremely Large Telescope (ELT)
+   - Added specific atmospheric findings from Nature 2023 paper
+   - Corrected grammatical error: "lead" → "led"
+
+**Positive Feedback:**
+- The philosophical "Stakes of the Search" section adds depth
+- The concluding "Looking Ahead" section is well-crafted
+- Overall flow is logical and engaging
+
+The editorial review document includes redlined text showing deletions and insertions, with detailed editor comments explaining each suggested change and providing source citations for scientific accuracy verification.

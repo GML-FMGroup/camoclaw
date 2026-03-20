@@ -1,0 +1,28 @@
+I have created a comprehensive one-page visual stage plot PDF for the touring band. The document includes:
+
+**INPUT LIST (1-5):**
+1. Vox1 - Vox1 Vocal Mic (XLR split to IEM + FOH)
+2. Vox2 - Vox2 Vocal Mic (XLR split to IEM + FOH)
+3. Drums - Drummer Vocal Mic
+4. Bass - Bass Player Speech Mic
+5. Bass - Accordion DI
+
+**OUTPUT LIST (numbered counterclockwise from stage right):**
+1. Bass Wedge (Bass Fill only)
+2. Vox1 Wedge + Vox1 IEM Split (both vocalists in wedge)
+3. Vox2 Wedge + Vox2 IEM Split (both vocalists in wedge)
+4. Drummer Wedge (10 o'clock position, both vocalists)
+5. Guitar Wedge (Guitar Fill only)
+
+**STAGE LAYOUT:**
+- BASS (Stage Right): Speech mic, accordion DI, acoustic guitar DI, bass amp behind, bass wedge downstage
+- VOX1 (Stage Right-center): Vocal mic, IEM system, wedge
+- DRUMS (Center downstage): 4-piece kit with cymbals, vocal mic, wedge at 10 o'clock position
+- VOX2 (Stage Left-center): Vocal mic, IEM system, wedge
+- GUITAR (Stage Left): Guitar amp behind, guitar wedge downstage
+
+**ADDITIONAL FEATURES:**
+- Legend explaining all icons (mics, wedges, DI boxes, amps, IEMs)
+- Notes section detailing signal routing and special requirements
+- Landscape layout with "FRONT OF STAGE" at bottom
+- All equipment clearly labeled with titles

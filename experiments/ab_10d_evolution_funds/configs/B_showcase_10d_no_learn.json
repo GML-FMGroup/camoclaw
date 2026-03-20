@@ -1,0 +1,63 @@
+{
+  "livebench": {
+    "date_range": {
+      "init_date": "2025-01-20",
+      "end_date": "2025-01-31"
+    },
+    "economic": {
+      "initial_balance": 10.0,
+      "task_values_path": "./scripts/task_value_estimates/task_values.jsonl",
+      "token_pricing": {
+        "input_per_1m": 2.5,
+        "output_per_1m": 10.0
+      }
+    },
+    "agents": [
+      {
+        "signature": "exp-10d-b-no-learn-showcase",
+        "basemodel": "moonshotai/kimi-k2.5",
+        "enabled": true,
+        "tasks_per_day": 1,
+        "supports_multimodal": true,
+        "task_assignment": {
+          "mode": "sequential",
+          "task_ids": [
+            "3a4c347c-4aec-43c7-9a54-eb1f816ab1f9",
+            "99ac6944-4ec6-4848-959c-a460ac705c6f",
+            "ec2fccc9-b7f6-4c73-bf51-896fdb433cec",
+            "f9a1c16c-53fd-4c8f-88cc-5c325ec2f0bb",
+            "401a07f1-d57e-4bb0-889b-22de8c900f0e",
+            "e4f664ea-0e5c-4e4e-a0d3-a87a33da947a",
+            "6241e678-4ba3-4831-b3c7-78412697febc",
+            "5d0feb24-e8b6-4ace-b64f-d5cd1a8b563d",
+            "a941b6d8-4289-4500-b45a-f8e4fc94a724",
+            "c94452e4-39cd-4846-b73a-ab75933d1ad7"
+          ]
+        }
+      }
+    ],
+    "agent_params": {
+      "max_steps": 25,
+      "max_retries": 3,
+      "base_delay": 0.5,
+      "tasks_per_day": 1,
+      "force_activity": "work",
+      "api_timeout": 120
+    },
+    "evaluation": {
+      "use_llm_evaluation": true,
+      "meta_prompts_dir": "./eval/meta_prompts"
+    },
+    "skill": {
+      "enabled": false,
+      "use_builtin": true
+    },
+    "evolution": {
+      "enabled": false,
+      "threshold": 0.6
+    },
+    "data_path": "./experiments/ab_10d_evolution_funds/data",
+    "gdpval_path": "./gdpval"
+  }
+}
+
