@@ -126,9 +126,20 @@ def _github_dark_cool_colors() -> Dict[str, str]:
     }
 
 
+def _github_dark_premium_bg_colors() -> Dict[str, str]:
+    """Same as github_dark but with light canvas for black-page visibility + 高级感."""
+    c = _github_dark_cool_colors()
+    c["canvas"] = "#f5f6f8"  # Premium light gray, stands out on black
+    c["fg_figure"] = "#24292f"  # Dark text for figure-level (suptitle) on light canvas
+    c["fg_muted_figure"] = "#57606a"
+    return c
+
+
 def get_color_palette(theme: str) -> Dict[str, str]:
     if theme == "github_dark":
         return _github_dark_cool_colors()
+    if theme == "github_dark_premium_bg":
+        return _github_dark_premium_bg_colors()
     return _github_colors()
 
 
@@ -370,6 +381,26 @@ def plot_panel_1_net_worth(
     ax.spines["left"].set_color(c["border"])
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
+
+    # Highlight A vs B: how much more A earned + percentage
+    pct = (data.delta_nw / data.final_nw_b * 100) if data.final_nw_b else 0.0
+    highlight_text = f"A earns +${data.delta_nw:,.0f} more  ({pct:.0f}%)"
+    xlim = ax.get_xlim()
+    ylim = ax.get_ylim()
+    ax.text(
+        0.98,
+        0.95,
+        highlight_text,
+        transform=ax.transAxes,
+        ha="right",
+        va="top",
+        fontsize=12,
+        fontweight="700",
+        color=c.get("success", c["accent_green"]),
+        bbox=dict(boxstyle="round,pad=0.4", facecolor=c.get("axes_bg", c["canvas"]), edgecolor=c.get("success", c["accent_green"]), linewidth=1.8),
+        zorder=10,
+    )
+
     plt.tight_layout(rect=[0, 0, 1, 0.88])
     out_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_path, bbox_inches="tight", facecolor=c["canvas"], dpi=dpi)
@@ -560,14 +591,16 @@ def plot_combined_four_panel(
     _apply_style(rcParams, c, theme)
     fig = plt.figure(figsize=(12.5, 7.2), dpi=dpi)
     fig.patch.set_facecolor(c["canvas"])
-    fig.suptitle(title, fontsize=15, fontweight="600", color=c["fg_default"], y=0.97)
+    fg_fig = c.get("fg_figure", c["fg_default"])
+    fg_muted_fig = c.get("fg_muted_figure", c["fg_muted"])
+    fig.suptitle(title, fontsize=15, fontweight="600", color=fg_fig, y=0.97)
     fig.text(
         0.5,
-        0.935,
+        0.925,
         "Self-evolution (A) vs no-learn baseline (B) · same task set · economic simulation",
         ha="center",
         fontsize=9.5,
-        color=c["fg_muted"],
+        color=fg_muted_fig,
     )
 
     gs = fig.add_gridspec(2, 2, left=0.08, right=0.96, top=0.88, bottom=0.18, wspace=0.28, hspace=0.35)
@@ -780,7 +813,7 @@ def plot_combined_four_panel(
         va="bottom",
         fontsize=9,
         fontweight="500",
-        color=c["fg_muted"],
+        color=fg_muted_fig,
         transform=fig.transFigure,
     )
 
@@ -831,6 +864,11 @@ def main() -> int:
         default=700,
         help="Output DPI for PNG (default 700). Higher = sharper on retina/high-DPI displays.",
     )
+    ap.add_argument(
+        "--panel1-only",
+        action="store_true",
+        help="Only generate net worth single chart (white bg), skip other panels and combined figure.",
+    )
     args = ap.parse_args()
     if args.combined_both_styles and not args.combined_out:
         ap.error("--combined-both-styles requires --combined-out")
@@ -849,7 +887,15 @@ def main() -> int:
     p2 = out_dir / f"{base}_2_cumulative_work_income.png"
     p3 = out_dir / f"{base}_3_per_task_payment.png"
 
-    plot_panel_1_net_worth(data, p1, subtitle, c, theme=theme, dpi=args.dpi)
+    if args.panel1_only:
+        c_light = get_color_palette("light")
+        plot_panel_1_net_worth(data, p1, subtitle, c_light, theme="light", dpi=args.dpi)
+        print(f"Wrote: {p1}")
+        return 0
+
+    # Single net worth chart always uses white background for README
+    c_light = get_color_palette("light")
+    plot_panel_1_net_worth(data, p1, subtitle, c_light, theme="light", dpi=args.dpi)
     plot_panel_2_work_income(data, p2, subtitle, c, theme=theme, dpi=args.dpi)
     plot_panel_3_per_task(data, p3, subtitle, c, theme=theme, dpi=args.dpi)
 
@@ -862,9 +908,9 @@ def main() -> int:
         if args.combined_both_styles:
             dark_path = comb
             light_path = comb.parent / f"{comb.stem}_light{comb.suffix}"
-            c_dark = get_color_palette("github_dark")
+            c_premium = get_color_palette("github_dark_premium_bg")  # Light canvas, black-page friendly
             c_light = get_color_palette("light")
-            plot_combined_four_panel(data, dark_path, args.title, c_dark, theme="github_dark", dpi=args.dpi)
+            plot_combined_four_panel(data, dark_path, args.title, c_premium, theme="github_dark", dpi=args.dpi)
             plot_combined_four_panel(data, light_path, args.title, c_light, theme="light", dpi=args.dpi)
             print(f"Wrote (GitHub Dark): {dark_path}")
             print(f"Wrote (light):       {light_path}")

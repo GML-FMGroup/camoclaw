@@ -9,7 +9,7 @@ from typing import Dict, Optional
 from fastmcp import FastMCP
 
 # Create MCP server
-mcp = FastMCP("SelfEvolvingClaw Tools")
+mcp = FastMCP("CamoClaw Tools")
 
 # Global state (will be set by the LiveAgent)
 CURRENT_STATE = {

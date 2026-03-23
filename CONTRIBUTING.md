@@ -1,4 +1,4 @@
-# Contributing to SelfEvolvingClaw
+# Contributing to CamoClaw
 
 Thank you for your interest in contributing. This document covers how to submit PRs, code style, and testing.
 
@@ -62,8 +62,3 @@ Thank you for your interest in contributing. This document covers how to submit 
 - Do not include sensitive logs or paths in PRs.
 - See [.env.example](.env.example) for required variables.
 
----
-
-## Questions?
-
-Open an [Issue](https://github.com/YOUR_ORG/SelfEvolvingClaw/issues) for bugs or feature requests.

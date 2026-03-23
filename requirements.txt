@@ -1,4 +1,4 @@
-# SelfEvolvingClaw 可运行依赖
+# CamoClaw 可运行依赖
 # Python >= 3.10
 
 # Core

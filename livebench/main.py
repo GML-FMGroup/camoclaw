@@ -1,5 +1,5 @@
 """
-SelfEvolvingClaw - Main Entry Point
+CamoClaw - Main Entry Point
 
 Economic survival simulation for AI agents.
 Agents must balance working and learning to maintain positive balance while being aware of token costs.
@@ -59,7 +59,7 @@ async def run_agent(agent: LiveAgent, init_date: str, end_date: str, exhaust: bo
 
 async def main(config_path: str, exhaust: bool = False):
     """Main execution function"""
-    print("🎮 SelfEvolvingClaw - AI Agent Task Completion Framework")
+    print("🎮 CamoClaw - AI Agent Task Completion Framework")
     print("=" * 60)
 
     # Load configuration
@@ -233,7 +233,7 @@ async def main(config_path: str, exhaust: bool = False):
 
 if __name__ == "__main__":
     # Parse arguments
-    parser = argparse.ArgumentParser(description="SelfEvolvingClaw - AI Agent Task Completion Framework")
+    parser = argparse.ArgumentParser(description="CamoClaw - AI Agent Task Completion Framework")
     parser.add_argument(
         "config",
         nargs="?",

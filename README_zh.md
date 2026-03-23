@@ -1,15 +1,11 @@
 <p align="center">
-  <table align="center">
-  <tr>
-    <td align="right" style="padding-right: 8px;"><span style="display: inline-block; background: #ffffff; padding: 8px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.15);"><img src="assets/logo.png" alt="SelfEvolvingClaw Logo" width="140" /></span></td>
-    <td align="left"><h1 style="font-size: 2.5em; margin: 0;">SelfEvolvingClaw</h1></td>
-  </tr>
-  </table>
-  <p align="center">执行中自造缺失能力 · 无需预设技能集 · 持续变强</p>
+  <img src="assets/logo2 .jpg" alt="CamoClaw" width="1200" />
+</p>
+<p align="center">执行中自造缺失能力 · 无需预设技能集 · 持续变强</p>
   <p align="center"><strong>+28% 净收益 · 13 条有效技能 · 10 天 A/B 验证</strong></p>
   <p align="center"><em>GDPVal 10 天 A/B 实验：相同任务下自进化 Agent，净收益约 +28%，沉淀 13 条有效技能，无需预设技能库。</em></p>
   <p align="center">
-    <img src="experiments/ab_10d_evolution_funds/figures/showcase_ab_github_style_combined.png" alt="A/B 效果对比：净值、收入、单题报酬" width="1000">
+    <img src="experiments/ab_10d_evolution_funds/figures/showcase_ab_github_style_combined_light.png" alt="A/B 效果对比：净值、收入、单题报酬" width="1000">
   </p>
   <p align="center">
     <img src="https://img.shields.io/badge/python-≥3.10-blue?logo=python&logoColor=white" alt="Python" />
@@ -18,21 +14,20 @@
   <p align="center">
     <a href="README.md">English</a> | <a href="README_zh.md">中文</a>
   </p>
-</p>
-
 
 ---
+
 
 ## 目录
 
 - [🎯 概述](#-概述)
-- [✨ 为什么选 SelfEvolvingClaw？](#-为什么选-selfevolvingclaw)
+- [📦 环境与安装](#-环境与安装)
+- [🚀 快速开始](#-快速开始)
+- [✨ 为什么选 CamoClaw？](#-为什么选-camoclaw)
 - [📊 效果数据](#-效果数据)
 - [🔄 工作原理](#-工作原理)
 - [⚡ 核心能力](#-核心能力)
 - [💡 设计理念](#-设计理念)
-- [📦 环境与安装](#-环境与安装)
-- [🚀 快速开始](#-快速开始)
 - [▶️ 运行方式](#️-运行方式)
 - [📁 项目结构](#-项目结构)
 - [⚙️ 配置说明](#️-配置说明)
@@ -45,76 +40,7 @@
 
 ## 🎯 概述
 
-**SelfEvolvingClaw**：让 Agent 在**执行过程中创造自己缺失的 skill**，随着时间推移能力逐步变强，而非依赖事先写死的技能集。在给定任务与经济约束下，Agent 执行工作、承担 token 成本、通过评估获得报酬，并运行 **Skill 自进化** 闭环（Run1 → Learn → Run2 → 技能沉淀）。
-
----
-
-## ✨ 为什么选 SelfEvolvingClaw？
-
-| 特点 | 现有缺陷 | 说明 |
-|------|------|------|
-| **无需预设技能** | 依赖固定 prompt/技能库，新任务需人工补充 | 能力在运行时动态生成，不依赖预设技能集 |
-| **失败即学习** | 失败后多为重试或调参，缺少从反馈中自动提炼可复用规则 | 低分触发 Learn → 提炼规则与代码 → Run2 重试验证 |
-| **只保留有效技能** | 易堆积无效技能或 prompt，难以维护、易冲突 | 仅在 Run2 中实际使用且带来提升的技能才写入 `skills.jsonl` |
-| **经济约束驱动** | 只关注任务完成，不显式建模成本与收益 | 模拟余额、token 成本、任务报酬，驱动理性决策 |
-| **有实验验证** | 多为概念或 demo，缺少可复现的量化对比 | 10 天 A/B：相同任务下净收益约 +28%，沉淀 13 条有效技能 |
-
-**适用场景**：需要 Agent 长期运行、持续改进、应对新任务；或希望在经济约束下做决策与学习的场景。
-
----
-
-## 📊 效果数据
-
-GDPVal 数据集 10 天 A/B 实验：**完全相同的任务序列**、相同初始余额（$10）。唯一差异——是否开启自进化。
-
-| 指标 | 自进化开启 (A) | 自进化关闭 (B) | Δ |
-|------|----------------|----------------|---|
-| **最终净值** | $1,344 | $1,049 | **+28%** |
-| **累计工作收入** | $1,335 | $1,040 | **+28%** |
-| **有效技能数** | 13 | 0 | — |
-
-<p align="center">
-  <img src="experiments/ab_10d_evolution_funds/figures/showcase_ab_github_style_1_net_worth.png" alt="净值曲线：10 天 A/B — 自进化 vs 基线" width="1000" />
-</p>
-
-*数据来自 [experiments/ab_10d_evolution_funds/](experiments/ab_10d_evolution_funds/)。相同 10 个任务、相同顺序；A 组从低分任务中学习，并将 Run2 中实际使用的技能持久化。*
-
----
-
-## 🔄 工作原理
-
-<p align="center">
-  <img src="assets/Flowchart.png" alt="流程图" width="1000">
-</p>
-
-**闭环原则**：仅当技能在 Run2 中被实际使用且带来提升时，才会持久化。避免无效技能堆积。
-
-
-## ⚡ 核心能力
-
-| 能力 | 说明 |
-|------|------|
-| **任务编排** | `task_id` / `sector` / `occupation` / `prompt` / `reference_files`，支持 inline、jsonl 或 GDPVal 任务源。 |
-| **会话调度** | 按日执行工作或学习会话，支持单日、多日与 exhaust 模式。 |
-| **经济约束** | 余额、token 成本、任务报酬与生存状态追踪，驱动理性决策。 |
-| **评估与反馈** | 基于 `eval/meta_prompts` 的评估标准进行 LLM 打分与结构化反馈。 |
-| **技能自进化** | 每 Agent 独立 `skill/skills.jsonl` 与候选 `candidates.jsonl`，由脚本统一编排 Run1→Learn→Run2 流程并写回有效技能。 |
-
----
-
-## 💡 设计理念
-
-- **🔄 闭环进化**：任务表现不佳时自动插入 Learn 会话，在 Run2 确认有效后将实际用到的技能写入 `skills.jsonl`，避免无效技能堆积。
-- **📂 隔离运行**：自进化脚本在隔离目录下生成 run1/learn/run2 配置。
-- **📌 可复现**：配置驱动、日期与任务可固定，便于复现与对比不同策略。
-
-三种典型使用路径：
-
-| 场景 | 说明 |
-|------|------|
-| **单日/两日任务** | 使用 inline 任务跑通完整流水线：执行 → 交付 → 评估 → 经济结算，并可触发 skill 机制。 |
-| **多日任务** | 按日期区间运行，多日经济约束下的任务完成（可选 GDPVal 或 inline/jsonl）。 |
-| **Skill 自进化** | 通过 `single_task_evolve.py` 编排 Run1 → Learn → Run2，将 Run2 确认有效的技能写回主目录。 |
+**CamoClaw**：让 Agent 在**执行过程中创造自己缺失的 skill**，随着时间推移能力逐步变强，而非依赖事先写死的技能集。在给定任务与经济约束下，Agent 执行工作、承担 token 成本、通过评估获得报酬，并运行 **Skill 自进化** 闭环（Run1 → Learn → Run2 → 技能沉淀）。
 
 ---
 
@@ -183,6 +109,75 @@ python scripts/single_task_evolve.py \
 ```
 
 脚本在隔离目录下生成 `run1.json` / `learn.json` / `run2.json`，并强制 `evolution.enabled=false`。
+
+---
+
+## ✨ 为什么选 CamoClaw？
+
+| 特点 | 现有缺陷 | 说明 |
+|------|------|------|
+| **无需预设技能** | 依赖固定 prompt/技能库，新任务需人工补充 | 能力在运行时动态生成，不依赖预设技能集 |
+| **失败即学习** | 失败后多为重试或调参，缺少从反馈中自动提炼可复用规则 | 低分触发 Learn → 提炼规则与代码 → Run2 重试验证 |
+| **只保留有效技能** | 易堆积无效技能或 prompt，难以维护、易冲突 | 仅在 Run2 中实际使用且带来提升的技能才写入 `skills.jsonl` |
+| **经济约束驱动** | 只关注任务完成，不显式建模成本与收益 | 模拟余额、token 成本、任务报酬，驱动理性决策 |
+| **有实验验证** | 多为概念或 demo，缺少可复现的量化对比 | 10 天 A/B：相同任务下净收益约 +28%，沉淀 13 条有效技能 |
+
+**适用场景**：需要 Agent 长期运行、持续改进、应对新任务；或希望在经济约束下做决策与学习的场景。
+
+---
+
+## 📊 效果数据
+
+GDPVal 数据集 10 天 A/B 实验：**完全相同的任务序列**、相同初始余额（$10）。唯一差异——是否开启自进化。
+
+| 指标 | 自进化开启 (A) | 自进化关闭 (B) | Δ |
+|------|----------------|----------------|---|
+| **最终净值** | $1,344 | $1,049 | **+28%** |
+| **累计工作收入** | $1,335 | $1,040 | **+28%** |
+| **有效技能数** | 13 | 0 | — |
+
+<p align="center">
+  <img src="experiments/ab_10d_evolution_funds/figures/showcase_ab_github_style_1_net_worth.png" alt="净值曲线：10 天 A/B — 自进化 vs 基线" width="1000" />
+</p>
+
+*数据来自 [experiments/ab_10d_evolution_funds/](experiments/ab_10d_evolution_funds/)。相同 10 个任务、相同顺序；A 组从低分任务中学习，并将 Run2 中实际使用的技能持久化。*
+
+---
+
+## 🔄 工作原理
+
+<p align="center">
+  <img src="assets/Flowchart.png" alt="流程图" width="1000">
+</p>
+
+**闭环原则**：仅当技能在 Run2 中被实际使用且带来提升时，才会持久化。避免无效技能堆积。
+
+
+## ⚡ 核心能力
+
+| 能力 | 说明 |
+|------|------|
+| **任务编排** | `task_id` / `sector` / `occupation` / `prompt` / `reference_files`，支持 inline、jsonl 或 GDPVal 任务源。 |
+| **会话调度** | 按日执行工作或学习会话，支持单日、多日与 exhaust 模式。 |
+| **经济约束** | 余额、token 成本、任务报酬与生存状态追踪，驱动理性决策。 |
+| **评估与反馈** | 基于 `eval/meta_prompts` 的评估标准进行 LLM 打分与结构化反馈。 |
+| **技能自进化** | 每 Agent 独立 `skill/skills.jsonl` 与候选 `candidates.jsonl`，由脚本统一编排 Run1→Learn→Run2 流程并写回有效技能。 |
+
+---
+
+## 💡 设计理念
+
+- **🔄 闭环进化**：任务表现不佳时自动插入 Learn 会话，在 Run2 确认有效后将实际用到的技能写入 `skills.jsonl`，避免无效技能堆积。
+- **📂 隔离运行**：自进化脚本在隔离目录下生成 run1/learn/run2 配置。
+- **📌 可复现**：配置驱动、日期与任务可固定，便于复现与对比不同策略。
+
+三种典型使用路径：
+
+| 场景 | 说明 |
+|------|------|
+| **单日/两日任务** | 使用 inline 任务跑通完整流水线：执行 → 交付 → 评估 → 经济结算，并可触发 skill 机制。 |
+| **多日任务** | 按日期区间运行，多日经济约束下的任务完成（可选 GDPVal 或 inline/jsonl）。 |
+| **Skill 自进化** | 通过 `single_task_evolve.py` 编排 Run1 → Learn → Run2，将 Run2 确认有效的技能写回主目录。 |
 
 ---
 

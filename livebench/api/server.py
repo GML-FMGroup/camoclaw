@@ -20,7 +20,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import glob
 
-app = FastAPI(title="SelfEvolvingClaw API", version="1.0.0")
+app = FastAPI(title="CamoClaw API", version="1.0.0")
 
 # Enable CORS for frontend
 app.add_middleware(
@@ -180,7 +180,7 @@ manager = ConnectionManager()
 async def root():
     """API root endpoint"""
     return {
-        "message": "SelfEvolvingClaw API",
+        "message": "CamoClaw API",
         "version": "1.0.0",
         "endpoints": {
             "agents": "/api/agents",
@@ -718,7 +718,7 @@ async def websocket_endpoint(websocket: WebSocket):
         # Send initial connection message
         await websocket.send_json({
             "type": "connected",
-            "message": "Connected to SelfEvolvingClaw real-time updates"
+            "message": "Connected to CamoClaw real-time updates"
         })
 
         # Keep connection alive and listen for messages
