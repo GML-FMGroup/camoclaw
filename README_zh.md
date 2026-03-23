@@ -1,6 +1,5 @@
 <p align="center">
-  <img src="assets/logo2 .jpg" alt="CamoClaw" width="1200" />
-</p>
+  <img src="assets/logo.png" alt="CamoClaw" width="1200" />
 <h1 align="center">CamoClaw: Your Self-Evolving AI Coworker</h1>
 <p align="center">
   <img src="https://img.shields.io/badge/python-≥3.10-blue?logo=python&logoColor=white" alt="Python" />
@@ -9,10 +8,9 @@
 </p>
 <p>🦎 CamoClaw：拓展任务边界，在执行中沉淀领域技能。</p>
 <p>⚡️ 相较静态技能库 Agent，CamoClaw 综合表现提升 28%。</p>
-<p>📏 可复现：运行 <code>python camoclaw/main.py camoclaw/configs/default_config.json</code> 即可验证。</p>
 
 <p align="center">
-  <img src="assets/chameleon_with_skills_box.png" alt="CamoClaw：变色龙与技能" width="900">
+  <img src="assets/image-0.png" alt="CamoClaw：变色龙与技能" width="1800">
 </p>
 
   <p align="center">
@@ -133,6 +131,8 @@ python scripts/single_task_evolve.py \
 ```
 
 脚本在隔离目录下生成 `run1.json` / `learn.json` / `run2.json`，并强制 `evolution.enabled=false`。
+
+📏 **可复现**：运行 <code>python camoclaw/main.py camoclaw/configs/default_config.json</code> 即可验证。
 
 ---
 

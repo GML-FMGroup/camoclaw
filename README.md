@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="assets/logo2 .jpg" alt="CamoClaw" width="1200" />
-</p>
+  <img src="assets/logo.png" alt="CamoClaw" width="1200" />
 <h1 align="center">CamoClaw: Your Self-Evolving AI Coworker</h1>
 <p align="center">
   <img src="https://img.shields.io/badge/python-≥3.10-blue?logo=python&logoColor=white" alt="Python" />
@@ -9,10 +7,9 @@
 </p>
 <p>🦎 CamoClaw: Expand task boundaries, accumulate domain skills during execution.</p>
 <p>⚡️ Delivers 28% better overall performance than static skill agents.</p>
-<p>📏 Reproducible: run <code>python camoclaw/main.py camoclaw/configs/default_config.json</code> to verify.</p>
 
 <p align="center">
-  <img src="assets/chameleon_with_skills_box.png" alt="CamoClaw: Chameleon with skills" width="900">
+  <img src="assets/image-0.png" alt="CamoClaw: Chameleon with skills" width="1800">
 </p>
 
   <p align="center">
@@ -133,6 +130,8 @@ python scripts/single_task_evolve.py \
 ```
 
 The script generates `run1.json` / `learn.json` / `run2.json` under an isolated directory and forces `evolution.enabled=false`.
+
+📏 **Reproducible**: run <code>python camoclaw/main.py camoclaw/configs/default_config.json</code> to verify.
 
 ---
 
