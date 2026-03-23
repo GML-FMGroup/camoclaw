@@ -23,19 +23,19 @@ scripts/*.pyd
 
 # 运行数据与产出（体积大，不提交）
 docs/
-livebench/data/agent_data/*/
-!livebench/data/agent_data/.gitkeep
+camoclaw/data/agent_data/*/
+!camoclaw/data/agent_data/.gitkeep
 # single_task_debug/runs 下的 run 目录全部提交（不忽略）
-# livebench/data/single_task_debug/runs/*/
-# !livebench/data/single_task_debug/runs/.gitkeep
+# camoclaw/data/single_task_debug/runs/*/
+# !camoclaw/data/single_task_debug/runs/.gitkeep
 gdpval/
 
 # 参考文件与沙箱产物
 **/reference_files/
 **/sandbox/
 # single_task_debug/runs 下的 sandbox 需纳入版本控制（learn 阶段 skill 产物）
-!livebench/data/single_task_debug/runs/*/learn/*/sandbox/
-!livebench/data/single_task_debug/runs/*/learn/*/sandbox/**
+!camoclaw/data/single_task_debug/runs/*/learn/*/sandbox/
+!camoclaw/data/single_task_debug/runs/*/learn/*/sandbox/**
 
 # IDE / OS
 .vscode/

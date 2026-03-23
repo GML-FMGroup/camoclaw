@@ -1,29 +1,55 @@
 <p align="center">
   <img src="assets/logo2 .jpg" alt="CamoClaw" width="1200" />
 </p>
-<p align="center">执行中自造缺失能力 · 无需预设技能集 · 持续变强</p>
-  <p align="center"><strong>+28% 净收益 · 13 条有效技能 · 10 天 A/B 验证</strong></p>
-  <p align="center"><em>GDPVal 10 天 A/B 实验：相同任务下自进化 Agent，净收益约 +28%，沉淀 13 条有效技能，无需预设技能库。</em></p>
-  <p align="center">
-    <img src="experiments/ab_10d_evolution_funds/figures/showcase_ab_github_style_combined_light.png" alt="A/B 效果对比：净值、收入、单题报酬" width="1000">
-  </p>
-  <p align="center">
-    <img src="https://img.shields.io/badge/python-≥3.10-blue?logo=python&logoColor=white" alt="Python" />
-    <img src="https://img.shields.io/badge/license-MIT-green" alt="License" />
-  </p>
+<h1 align="center">CamoClaw: Your Self-Evolving AI Coworker</h1>
+<p align="center">
+  <img src="https://img.shields.io/badge/python-≥3.10-blue?logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/dataset-GDPVal%20220%20tasks-6f42c1" alt="Dataset" />
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="License" />
+</p>
+🦎 CamoClaw：拓展任务边界，在执行中沉淀领域技能。
+
+⚡️ 相较静态技能库 Agent，CamoClaw 综合表现提升 28%。
+
+📏 可复现：运行 <code>python camoclaw/main.py camoclaw/configs/default_config.json</code> 即可验证。
+
+<p align="center">
+  <img src="assets/chameleon_with_skills_box.png" alt="CamoClaw：变色龙与技能" width="900">
+</p>
+
   <p align="center">
     <a href="README.md">English</a> | <a href="README_zh.md">中文</a>
   </p>
 
 ---
 
+## 📢 News
+
+2026-03-20 🚀 **正式发布** — 自进化 AI Agent：零预设、执行中沉淀技能、Run1→Learn→Run2 闭环、经济约束驱动。详见 [概述](#-概述)。
+
+---
+
+## ✨ CamoClaw 核心特点
+
+💼 **多 sector 职业任务**：支持多样化真实世界任务——inline、JSONL 或 GDPVal 任务源，支持 sector/occupation 元数据编排。
+
+💸 **经济约束模拟**：余额、token 成本与任务报酬驱动理性决策。每笔 API 调用计费；收入仅来自高质量交付物。
+
+🦎 **零预设、技能沉淀**：无固定技能集。能力在运行时自造；低分触发 Learn → 提炼规则与代码 → Run2 重试验证。
+
+📦 **闭环技能沉淀**：仅在 Run2 中实际使用且带来提升的技能才写入 `skills.jsonl`。无无效堆积。
+
+📊 **端到端工作流**：任务分配 → 执行 → 产出 → LLM 评估 → 结算——完整专业流水线。
+
+⚖️ **分 sector 的 LLM 评估**：按 sector 定制评估 rubric——确保评估贴合真实专业标准。
+
+---
 
 ## 目录
 
 - [🎯 概述](#-概述)
 - [📦 环境与安装](#-环境与安装)
 - [🚀 快速开始](#-快速开始)
-- [✨ 为什么选 CamoClaw？](#-为什么选-camoclaw)
 - [📊 效果数据](#-效果数据)
 - [🔄 工作原理](#-工作原理)
 - [⚡ 核心能力](#-核心能力)
@@ -86,16 +112,16 @@ cp .env.example .env
 
 ### 1️⃣ 单日/两日任务（完整流水线 + Skill）
 
-使用内置配置 `livebench/configs/simple_task_config.json`（2 天、2 个 inline 任务；Run1 不调用技能，Run2 需先调用 `get_skill_content` 再提交）：
+使用内置配置 `camoclaw/configs/simple_task_config.json`（2 天、2 个 inline 任务；Run1 不调用技能，Run2 需先调用 `get_skill_content` 再提交）：
 
 ```bash
-python livebench/main.py livebench/configs/simple_task_config.json
+python camoclaw/main.py camoclaw/configs/simple_task_config.json
 ```
 
 ### 2️⃣ 多日任务（如 10 天）
 
 ```bash
-python livebench/main.py livebench/configs/default_config.json
+python camoclaw/main.py camoclaw/configs/default_config.json
 ```
 
 未使用 GDPVal 时，在配置中设置 `task_source.type: "inline"` 或 `"jsonl"` 即可。
@@ -104,31 +130,17 @@ python livebench/main.py livebench/configs/default_config.json
 
 ```bash
 python scripts/single_task_evolve.py \
-  --config-run1 livebench/configs/single_task_debug_run1.json \
-  --config-run2 livebench/configs/single_task_debug_run2.json
+  --config-run1 camoclaw/configs/single_task_debug_run1.json \
+  --config-run2 camoclaw/configs/single_task_debug_run2.json
 ```
 
 脚本在隔离目录下生成 `run1.json` / `learn.json` / `run2.json`，并强制 `evolution.enabled=false`。
 
 ---
 
-## ✨ 为什么选 CamoClaw？
-
-| 特点 | 现有缺陷 | 说明 |
-|------|------|------|
-| **无需预设技能** | 依赖固定 prompt/技能库，新任务需人工补充 | 能力在运行时动态生成，不依赖预设技能集 |
-| **失败即学习** | 失败后多为重试或调参，缺少从反馈中自动提炼可复用规则 | 低分触发 Learn → 提炼规则与代码 → Run2 重试验证 |
-| **只保留有效技能** | 易堆积无效技能或 prompt，难以维护、易冲突 | 仅在 Run2 中实际使用且带来提升的技能才写入 `skills.jsonl` |
-| **经济约束驱动** | 只关注任务完成，不显式建模成本与收益 | 模拟余额、token 成本、任务报酬，驱动理性决策 |
-| **有实验验证** | 多为概念或 demo，缺少可复现的量化对比 | 10 天 A/B：相同任务下净收益约 +28%，沉淀 13 条有效技能 |
-
-**适用场景**：需要 Agent 长期运行、持续改进、应对新任务；或希望在经济约束下做决策与学习的场景。
-
----
-
 ## 📊 效果数据
 
-GDPVal 数据集 10 天 A/B 实验：**完全相同的任务序列**、相同初始余额（$10）。唯一差异——是否开启自进化。
+GDPVal 数据集 10 天 A/B 实验：**完全相同的任务序列**（每天一个真实任务）、相同初始余额（$10）。唯一差异——是否开启自进化。
 
 | 指标 | 自进化开启 (A) | 自进化关闭 (B) | Δ |
 |------|----------------|----------------|---|
@@ -137,7 +149,7 @@ GDPVal 数据集 10 天 A/B 实验：**完全相同的任务序列**、相同初
 | **有效技能数** | 13 | 0 | — |
 
 <p align="center">
-  <img src="experiments/ab_10d_evolution_funds/figures/showcase_ab_github_style_1_net_worth.png" alt="净值曲线：10 天 A/B — 自进化 vs 基线" width="1000" />
+  <img src="experiments/ab_10d_evolution_funds/figures/showcase_ab_github_style_combined_light.png" alt="A/B 效果对比：净值、收入、单题报酬" width="1000">
 </p>
 
 *数据来自 [experiments/ab_10d_evolution_funds/](experiments/ab_10d_evolution_funds/)。相同 10 个任务、相同顺序；A 组从低分任务中学习，并将 Run2 中实际使用的技能持久化。*
@@ -185,19 +197,19 @@ GDPVal 数据集 10 天 A/B 实验：**完全相同的任务序列**、相同初
 
 | 用途 | 命令 |
 |------|------|
-| 单日/两日任务 | `python livebench/main.py livebench/configs/simple_task_config.json` |
-| 多日任务 | `python livebench/main.py livebench/configs/default_config.json` |
-| 自进化 | `python scripts/single_task_evolve.py --config-run1 livebench/configs/single_task_debug_run1.json --config-run2 livebench/configs/single_task_debug_run2.json` |
+| 单日/两日任务 | `python camoclaw/main.py camoclaw/configs/simple_task_config.json` |
+| 多日任务 | `python camoclaw/main.py camoclaw/configs/default_config.json` |
+| 自进化 | `python scripts/single_task_evolve.py --config-run1 camoclaw/configs/single_task_debug_run1.json --config-run2 camoclaw/configs/single_task_debug_run2.json` |
 
 可通过环境变量覆盖配置中的日期（需与配置内日期一致）：
 
 ```bash
 # Windows (PowerShell)
 $env:INIT_DATE="2025-01-20"; $env:END_DATE="2025-01-21"
-python livebench/main.py livebench/configs/simple_task_config.json
+python camoclaw/main.py camoclaw/configs/simple_task_config.json
 
 # Linux/macOS
-INIT_DATE=2025-01-20 END_DATE=2025-01-21 python livebench/main.py livebench/configs/simple_task_config.json
+INIT_DATE=2025-01-20 END_DATE=2025-01-21 python camoclaw/main.py camoclaw/configs/simple_task_config.json
 ```
 
 ---
@@ -206,7 +218,7 @@ INIT_DATE=2025-01-20 END_DATE=2025-01-21 python livebench/main.py livebench/conf
 
 ```
 .
-├── livebench/           # 主框架
+├── camoclaw/           # 主框架
 │   ├── main.py          # 入口
 │   ├── agent/           # Agent 与运行逻辑
 │   ├── work/            # 任务选择、交付、评估
@@ -242,7 +254,7 @@ INIT_DATE=2025-01-20 END_DATE=2025-01-21 python livebench/main.py livebench/conf
 | `skill.enabled` / `skill.use_builtin` | 是否启用技能及内置技能。 |
 | `evolution.enabled` / `evolution.threshold` | 是否在主流程中启用进化及分数阈值。 |
 | `evaluation.meta_prompts_dir` | 评估目录，通常为 `./eval/meta_prompts`。 |
-| `data_path` | Agent 数据根目录，默认 `./livebench/data/agent_data`。 |
+| `data_path` | Agent 数据根目录，默认 `./camoclaw/data/agent_data`。 |
 
 ---
 
@@ -306,7 +318,7 @@ def draw_wedge(ax, x, y, angle=0, label=None, color='#4169E1'):
 **Q：没有 GDPVal 数据集可以运行吗？**  
 可以。**GDPVal 为可选。** 无 GDPVal 时：
 
-- **Inline 任务**：设置 `task_source.type: "inline"`，在配置中提供 `task_source.tasks`（参考 [simple_task_config.json](livebench/configs/simple_task_config.json)）。
+- **Inline 任务**：设置 `task_source.type: "inline"`，在配置中提供 `task_source.tasks`（参考 [simple_task_config.json](camoclaw/configs/simple_task_config.json)）。
 - **JSONL 任务**：设置 `task_source.type: "jsonl"`，将 `task_source.path` 指向 JSONL 文件，每行一个任务对象，包含 `task_id`、`sector`、`occupation`、`prompt`，可选 `reference_files`。
 
 两种模式均支持完整流水线（工作 → 评估 → 经济结算 → 技能）。Inline 适合快速验证；JSONL 适合批量任务。
@@ -315,7 +327,7 @@ def draw_wedge(ax, x, y, angle=0, label=None, color='#4169E1'):
 `inline` 模式：在 `task_source.tasks` 中添加对象，包含 `task_id`、`sector`、`occupation`、`prompt`，可选 `reference_files`。`jsonl` 模式：将 `task_source.path` 指向包含相同字段的 JSONL 文件。
 
 **Q：技能存在哪里，如何查看？**  
-每 Agent 技能：`livebench/data/agent_data/<signature>/skill/skills.jsonl`。候选技能：同目录下的 `candidates.jsonl`。运行中 Agent 可调用 `get_skills`、`get_skill_content(name)`。也可直接读取 JSONL 文件。
+每 Agent 技能：`camoclaw/data/agent_data/<signature>/skill/skills.jsonl`。候选技能：同目录下的 `candidates.jsonl`。运行中 Agent 可调用 `get_skills`、`get_skill_content(name)`。也可直接读取 JSONL 文件。
 
 **Q：如何复现 A/B 实验？**  
 在 A、B 配置中固定 `date_range` 和 `task_assignment.task_ids`。A 组 `evolution.enabled=true`，B 组 `evolution.enabled=false`。使用不同 `signature` 以隔离数据目录。详见 [experiments/ab_10d_evolution_funds/](experiments/ab_10d_evolution_funds/)。
@@ -330,7 +342,7 @@ def draw_wedge(ax, x, y, angle=0, label=None, color='#4169E1'):
 | 资源 | 说明 |
 |------|------|
 | [experiments/ab_10d_evolution_funds/](experiments/ab_10d_evolution_funds/) | 10 天 A/B 实验配置、运行与数据 |
-| [livebench/configs/](livebench/configs/) | 配置示例：inline 任务、多日、自进化 |
+| [camoclaw/configs/](camoclaw/configs/) | 配置示例：inline 任务、多日、自进化 |
 
 **下一步**：用 [快速开始](#-快速开始) 跑通 `simple_task_config.json` → 尝试 `single_task_evolve.py` 完成 Run1→Learn→Run2 → 用自有 `task_ids` 复现 A/B 实验。
 

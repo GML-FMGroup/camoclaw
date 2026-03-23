@@ -1,0 +1,52 @@
+{
+  "camoclaw": {
+    "date_range": {
+      "init_date": "2025-01-15",
+      "end_date": "2025-01-15"
+    },
+    "economic": {
+      "initial_balance": 10.0,
+      "task_values_path": "./scripts/task_value_estimates/task_values.jsonl",
+      "token_pricing": {
+        "input_per_1m": 2.5,
+        "output_per_1m": 10.0
+      }
+    },
+    "agents": [
+      {
+        "signature": "debug-agent",
+        "basemodel": "moonshotai/kimi-k2.5",
+        "enabled": true,
+        "tasks_per_day": 1,
+        "supports_multimodal": true
+      }
+    ],
+    "agent_params": {
+      "max_steps": 25,
+      "max_retries": 3,
+      "base_delay": 0.5,
+      "tasks_per_day": 1,
+      "api_timeout": 600
+    },
+    "evaluation": {
+      "use_llm_evaluation": true,
+      "meta_prompts_dir": "./eval/meta_prompts"
+    },
+    "skill": {
+      "enabled": true
+    },
+    "data_path": "./livebench/data/agent_data_debug/run2",
+    "task_source": {
+      "type": "inline",
+      "tasks": [
+        {
+          "task_id": "debug-1",
+          "sector": "Software",
+          "occupation": "Software Developers",
+          "prompt": "Complete the task below by **first analyzing available skills, calling relevant skills at the right time, and delivering accurately**.\n\n## Instructions\n1. **Analyze skills**: From the \"YOUR SKILLS\" list (names and descriptions), identify which skills apply to the current task.\n2. **Call at the right time**: Before or during the relevant step, call `get_skill_content(skill_name)` to read the full skill and follow its guidance. Do not load all skills at once; call only when needed.\n3. **Deliver accurately**: Follow the task description and skill guidance. Use ARTIFACT_PATH in `execute_code` output and submit with `submit_work(artifact_file_paths=...)`; or use `create_file` for reports then `submit_work`.\n\n## Notes\n- Evaluation emphasizes whether you called the right skills at the right time and delivered as required.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n**Skill usage**\n→ **Call the right skill at the right time**: Call get_skill_content(name) only for skills relevant to the current task or step; do not load every skill at once.\n\n📚 **YOUR SKILLS** — Only names and short descriptions are listed below. Call get_skill_content(skill_name) only when you need the full content of a specific skill.\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        }
+      ]
+    }
+  }
+}
+

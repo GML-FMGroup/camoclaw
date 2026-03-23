@@ -44,13 +44,13 @@ Thank you for your interest in contributing. This document covers how to submit 
 
 - **Manual testing**: Run the quickstart before submitting:
   ```bash
-  python livebench/main.py livebench/configs/simple_task_config.json
+  python camoclaw/main.py camoclaw/configs/simple_task_config.json
   ```
 - **Evolution workflow**: If your changes touch evolution logic, run:
   ```bash
   python scripts/single_task_evolve.py \
-    --config-run1 livebench/configs/single_task_debug_run1.json \
-    --config-run2 livebench/configs/single_task_debug_run2.json
+    --config-run1 camoclaw/configs/single_task_debug_run1.json \
+    --config-run2 camoclaw/configs/single_task_debug_run2.json
   ```
 - **No automated tests yet**: The project currently relies on manual runs. Adding `pytest` or similar is welcome.
 

@@ -1,29 +1,55 @@
 <p align="center">
   <img src="assets/logo2 .jpg" alt="CamoClaw" width="1200" />
 </p>
-<p align="center">Create missing capabilities during execution · No fixed skill set required · Keep getting stronger</p>
-  <p align="center"><strong>+28% net worth · 13 validated skills · 10-day A/B verified</strong></p>
-  <p align="center"><em>GDPVal 10-day A/B experiment: self-evolving agent achieves ~28% higher net worth on identical tasks, 13 validated skills, no preset skill set.</em></p>
-  <p align="center">
-    <img src="experiments/ab_10d_evolution_funds/figures/showcase_ab_github_style_combined_light.png" alt="A/B: Self-evolution vs baseline — net worth, income, per-task" width="1000">
-  </p>
-  <p align="center">
-    <img src="https://img.shields.io/badge/python-≥3.10-blue?logo=python&logoColor=white" alt="Python" />
-    <img src="https://img.shields.io/badge/license-MIT-green" alt="License" />
-  </p>
+<h1 align="center">CamoClaw: Your Self-Evolving AI Coworker</h1>
+<p align="center">
+  <img src="https://img.shields.io/badge/python-≥3.10-blue?logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/dataset-GDPVal%20220%20tasks-6f42c1" alt="Dataset" />
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="License" />
+</p>
+🦎 CamoClaw: Expand task boundaries, accumulate domain skills during execution.
+
+⚡️ Delivers 28% better overall performance than static skill agents.
+
+📏 Reproducible: run <code>python camoclaw/main.py camoclaw/configs/default_config.json</code> to verify.
+
+<p align="center">
+  <img src="assets/chameleon_with_skills_box.png" alt="CamoClaw: Chameleon with skills" width="900">
+</p>
+
   <p align="center">
     <a href="README.md">English</a> | <a href="README_zh.md">中文</a>
   </p>
 
 ---
 
+## 📢 News
+
+2026-03-20 🚀 **Official release** — Self-evolving AI agent: zero preset, skill precipitation during execution, Run1→Learn→Run2 closed loop, economic-constraint driven. See [Overview](#-overview).
+
+---
+
+## ✨ CamoClaw's Key Features
+
+💼 **Multi-Sector Professional Tasks**: Support for real-world tasks across diverse sectors — inline, JSONL, or GDPVal sources; task orchestration with sector/occupation metadata.
+
+💸 **Economic Constraint Simulation**: Balance, token costs, and task income drive rational decisions. Agents pay for every API call; income comes only from quality deliverables.
+
+🦎 **Zero Preset, Skill Precipitation**: No fixed skill set. Capabilities emerge at runtime; low score triggers Learn → extract rules & code → Run2 retry and validate.
+
+📦 **Closed-Loop Skill Persistence**: Only skills actually used in Run2 with measurable improvement are written to `skills.jsonl`. No skill bloat.
+
+📊 **End-to-End Workflow**: Task Assignment → Execution → Artifact Creation → LLM Evaluation → Payment — a complete professional pipeline.
+
+⚖️ **Sector-Aware LLM Evaluation**: Category-specific rubrics per sector — ensuring assessment matches real professional standards.
+
+---
 
 ## Table of contents
 
 - [🎯 Overview](#-overview)
 - [📦 Setup & installation](#-setup--installation)
 - [🚀 Quickstart](#-quickstart)
-- [✨ Why CamoClaw?](#-why-camoclaw)
 - [📊 Results](#-results)
 - [🔄 How it works](#-how-it-works)
 - [⚡ Core capabilities](#-core-capabilities)
@@ -86,16 +112,16 @@ Run all commands from the **repository root** so relative paths resolve correctl
 
 ### 1️⃣ Single / two-day tasks (full pipeline + skills)
 
-Use built-in config `livebench/configs/simple_task_config.json` (2 days, 2 inline tasks; Run1 doesn't use skills; Run2 requires calling `get_skill_content` before submitting).
+Use built-in config `camoclaw/configs/simple_task_config.json` (2 days, 2 inline tasks; Run1 doesn't use skills; Run2 requires calling `get_skill_content` before submitting).
 
 ```bash
-python livebench/main.py livebench/configs/simple_task_config.json
+python camoclaw/main.py camoclaw/configs/simple_task_config.json
 ```
 
 ### 2️⃣ Multi-day tasks (e.g., 10 days)
 
 ```bash
-python livebench/main.py livebench/configs/default_config.json
+python camoclaw/main.py camoclaw/configs/default_config.json
 ```
 
 When not using GDPVal, set `task_source.type: "inline"` or `"jsonl"` in the config.
@@ -104,31 +130,17 @@ When not using GDPVal, set `task_source.type: "inline"` or `"jsonl"` in the conf
 
 ```bash
 python scripts/single_task_evolve.py \
-  --config-run1 livebench/configs/single_task_debug_run1.json \
-  --config-run2 livebench/configs/single_task_debug_run2.json
+  --config-run1 camoclaw/configs/single_task_debug_run1.json \
+  --config-run2 camoclaw/configs/single_task_debug_run2.json
 ```
 
 The script generates `run1.json` / `learn.json` / `run2.json` under an isolated directory and forces `evolution.enabled=false`.
 
 ---
 
-## ✨ Why CamoClaw?
-
-| Feature | Defect | Description |
-|------|------|------|
-| **No preset skills** | Fixed prompts/skill sets; new tasks require manual additions | Capabilities are created at runtime, no preset skill set needed |
-| **Learn from failure** | Failures lead to retries or tuning; no automatic extraction of reusable rules from feedback | Low score triggers Learn → extract rules & code → Run2 retry and validate |
-| **Only persist valid skills** | Invalid skills/prompts accumulate; hard to maintain, prone to conflicts | Only skills actually used in Run2 with measurable improvement are written to `skills.jsonl` |
-| **Economic constraints** | Focus on task completion only; no explicit cost–benefit modeling | Simulate balance, token costs, task income; drive rational decisions |
-| **Experiment-backed** | Mostly concepts or demos; little reproducible quantitative comparison | 10-day A/B: ~+28% net worth on same tasks; 13 validated skills |
-
-**Use cases**: Long-running agents that need to improve over time; new task types; decision-making under economic constraints.
-
----
-
 ## 📊 Results
 
-10-day A/B experiment on GDPVal dataset: **identical task sequences**, same starting balance ($10). The only difference—self-evolution enabled vs. disabled.
+10-day A/B experiment on GDPVal dataset: **identical task sequences** (one real task per day), same starting balance ($10). The only difference—self-evolution enabled vs. disabled.
 
 | Metric | Evolve ON (A) | Evolve OFF (B) | Δ |
 |--------|---------------|----------------|---|
@@ -137,7 +149,7 @@ The script generates `run1.json` / `learn.json` / `run2.json` under an isolated 
 | **Validated skills** | 13 | 0 | — |
 
 <p align="center">
-  <img src="experiments/ab_10d_evolution_funds/figures/showcase_ab_github_style_1_net_worth.png" alt="Net worth: 10-day A/B — Evolve ON vs OFF" width="1000" />
+  <img src="experiments/ab_10d_evolution_funds/figures/showcase_ab_github_style_combined_light.png" alt="A/B: Self-evolution vs baseline — net worth, income, per-task" width="1000">
 </p>
 
 *Data from [experiments/ab_10d_evolution_funds/](experiments/ab_10d_evolution_funds/). Same 10 tasks, same order; A learns from low-score runs and persists skills used in Run2.*
@@ -185,19 +197,19 @@ Three typical usage paths:
 
 | Purpose | Command |
 |------|------|
-| Single / two-day tasks | `python livebench/main.py livebench/configs/simple_task_config.json` |
-| Multi-day tasks | `python livebench/main.py livebench/configs/default_config.json` |
-| Self-evolution | `python scripts/single_task_evolve.py --config-run1 livebench/configs/single_task_debug_run1.json --config-run2 livebench/configs/single_task_debug_run2.json` |
+| Single / two-day tasks | `python camoclaw/main.py camoclaw/configs/simple_task_config.json` |
+| Multi-day tasks | `python camoclaw/main.py camoclaw/configs/default_config.json` |
+| Self-evolution | `python scripts/single_task_evolve.py --config-run1 camoclaw/configs/single_task_debug_run1.json --config-run2 camoclaw/configs/single_task_debug_run2.json` |
 
 Override dates via env vars (must match the dates in the config).
 
 ```bash
 # Windows (PowerShell)
 $env:INIT_DATE="2025-01-20"; $env:END_DATE="2025-01-21"
-python livebench/main.py livebench/configs/simple_task_config.json
+python camoclaw/main.py camoclaw/configs/simple_task_config.json
 
 # Linux/macOS
-INIT_DATE=2025-01-20 END_DATE=2025-01-21 python livebench/main.py livebench/configs/simple_task_config.json
+INIT_DATE=2025-01-20 END_DATE=2025-01-21 python camoclaw/main.py camoclaw/configs/simple_task_config.json
 ```
 
 ---
@@ -206,7 +218,7 @@ INIT_DATE=2025-01-20 END_DATE=2025-01-21 python livebench/main.py livebench/conf
 
 ```
 .
-├── livebench/           # core framework
+├── camoclaw/           # core framework
 │   ├── main.py          # entrypoint
 │   ├── agent/           # agent runtime
 │   ├── work/            # task selection, submission, evaluation
@@ -242,7 +254,7 @@ Configs are JSON. Common fields:
 | `skill.enabled` / `skill.use_builtin` | Enable skills and built-in skills. |
 | `evolution.enabled` / `evolution.threshold` | Enable evolution (in main workflow) and score threshold. |
 | `evaluation.meta_prompts_dir` | Evaluation directory, usually `./eval/meta_prompts`. |
-| `data_path` | Agent data root, default `./livebench/data/agent_data`. |
+| `data_path` | Agent data root, default `./camoclaw/data/agent_data`. |
 
 ---
 
@@ -306,7 +318,7 @@ def draw_wedge(ax, x, y, angle=0, label=None, color='#4169E1'):
 **Q: Can I run without GDPVal?**  
 Yes. **GDPVal is optional.** When you don't have the GDPVal dataset:
 
-- **Inline tasks**: Set `task_source.type: "inline"` and provide `task_source.tasks` in the config (see [simple_task_config.json](livebench/configs/simple_task_config.json)).
+- **Inline tasks**: Set `task_source.type: "inline"` and provide `task_source.tasks` in the config (see [simple_task_config.json](camoclaw/configs/simple_task_config.json)).
 - **JSONL tasks**: Set `task_source.type: "jsonl"` and point `task_source.path` to a JSONL file where each line is a task object with `task_id`, `sector`, `occupation`, `prompt`, and optional `reference_files`.
 
 Both modes support the full pipeline (work → evaluate → economics → skills). Use inline for quick validation; use JSONL for batch tasks.
@@ -315,7 +327,7 @@ Both modes support the full pipeline (work → evaluate → economics → skills
 For `inline` source: add objects with `task_id`, `sector`, `occupation`, `prompt`, and optional `reference_files` to `task_source.tasks`. For `jsonl`: point `task_source.path` to a JSONL file with the same fields per line.
 
 **Q: Where are skills stored, and how do I inspect them?**  
-Per-agent skills: `livebench/data/agent_data/<signature>/skill/skills.jsonl`. Candidates: `candidates.jsonl` in the same directory. The agent can call `get_skills` and `get_skill_content(name)` during runs. You can also read the JSONL files directly.
+Per-agent skills: `camoclaw/data/agent_data/<signature>/skill/skills.jsonl`. Candidates: `candidates.jsonl` in the same directory. The agent can call `get_skills` and `get_skill_content(name)` during runs. You can also read the JSONL files directly.
 
 **Q: How do I reproduce the A/B experiment?**  
 Use fixed `date_range` and `task_assignment.task_ids` in both A and B configs. Run A with `evolution.enabled=true`, B with `evolution.enabled=false`. Use different `signature` values so data dirs are isolated. See [experiments/ab_10d_evolution_funds/](experiments/ab_10d_evolution_funds/).
@@ -330,7 +342,7 @@ Note: Only skills that are actually used in Run2 (and Run2 improves over Run1) w
 | Resource | Description |
 |----------|-------------|
 | [experiments/ab_10d_evolution_funds/](experiments/ab_10d_evolution_funds/) | 10-day A/B experiment setup, configs, and data |
-| [livebench/configs/](livebench/configs/) | Config examples: inline tasks, multi-day, evolution |
+| [camoclaw/configs/](camoclaw/configs/) | Config examples: inline tasks, multi-day, evolution |
 
 **Next steps**: Run the [Quickstart](#-quickstart) with `simple_task_config.json` → try `single_task_evolve.py` for Run1→Learn→Run2 → reproduce the A/B experiment with your own `task_ids`.
 

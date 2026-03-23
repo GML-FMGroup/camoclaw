@@ -41,7 +41,7 @@ def read_exclude_ids(paths: Iterable[Path]) -> Set[str]:
         if not p.exists():
             continue
         data = json.loads(p.read_text(encoding="utf-8"))
-        lb = (data.get("livebench") or {})
+        lb = (data.get("camoclaw") or data.get("livebench") or {})
         agents = lb.get("agents") or []
         for a in agents:
             ta = a.get("task_assignment") or {}

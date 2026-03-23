@@ -67,7 +67,7 @@ def _task_difficulty_score(task: Dict[str, Any]) -> float:
 
 def _extract_task_from_config(config_path: Path) -> Dict[str, Any]:
     cfg = _load_json(config_path)
-    lb = cfg.get("livebench") or {}
+    lb = cfg.get("camoclaw") or {}
     return _extract_single_inline_task(lb)
 
 
@@ -210,7 +210,7 @@ def _create_learn_config(
     search_web / read_webpage / learn / execute_code etc., and are not required to submit work.
     """
     cfg = _load_json(base_config_path)
-    lb = cfg.get("livebench") or {}
+    lb = cfg.get("camoclaw") or {}
 
     # Data path for learning run: .../runs/<run_id>/learn
     learn_root = iso_root / "learn"
@@ -303,7 +303,7 @@ def _create_learn_config(
         "tasks": [learn_task],
     }
 
-    cfg["livebench"] = lb
+    cfg["camoclaw"] = lb
 
     out_dir = iso_root / "configs"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -448,7 +448,7 @@ def _get_single_date(lb: Dict[str, Any]) -> str:
 
 def _load_run_config(config_path: Path) -> RunConfig:
     cfg = _load_json(config_path)
-    lb = cfg.get("livebench") or {}
+    lb = cfg.get("camoclaw") or {}
     signature, _ = _first_enabled_agent_signature_and_model(lb)
     task = _extract_single_inline_task(lb)
     task_id = (task.get("task_id") or "").strip()
@@ -457,7 +457,7 @@ def _load_run_config(config_path: Path) -> RunConfig:
     date = _get_single_date(lb)
     data_path_root = Path(lb.get("data_path") or "").resolve()
     if not str(data_path_root):
-        raise ValueError("livebench.data_path is required")
+        raise ValueError("camoclaw.data_path is required")
     return RunConfig(
         config_path=config_path.resolve(),
         signature=signature,
@@ -491,7 +491,7 @@ def _build_descriptive_run_id(config_run1: Path, args) -> str:
     ts = time.strftime("%Y%m%d-%H%M%S")
     try:
         cfg = _load_json(config_run1)
-        lb = cfg.get("livebench") or {}
+        lb = cfg.get("camoclaw") or {}
         # agent / model
         agents = lb.get("agents") or []
         model = ""
@@ -532,8 +532,8 @@ def _build_descriptive_run_id(config_run1: Path, args) -> str:
         return ts
 
 
-def _run_livebench(config_path: Path) -> int:
-    cmd = [sys.executable, str(Path("livebench") / "main.py"), str(config_path)]
+def _run_camoclaw(config_path: Path) -> int:
+    cmd = [sys.executable, str(Path("camoclaw") / "main.py"), str(config_path)]
     # Pass current env so child gets TAVILY_API_KEY etc. (e.g. for read_webpage in learn phase)
     env = os.environ.copy()
     proc = subprocess.run(cmd, check=False, env=env, cwd=str(_project_root))
@@ -582,17 +582,17 @@ def _prepare_run2_rerun(run_dir: Path) -> Path:
     - Creates run2_<suffix> (e.g. run2_rerun) with minimal structure; writes Run1 feedback skill + Learn skills to candidates only.
     - Writes configs/run2_rerun.json with data_path pointing to the new run2_* directory.
     - Overwrites task prompt with current run2_intro + task description header + original task so system prompt uses the new skill-focused instructions.
-    Returns the path to the new config file to use for _run_livebench.
+    Returns the path to the new config file to use for _run_camoclaw.
     """
     run_dir = run_dir.resolve()
     config_path = run_dir / "configs" / "run2.json"
     if not config_path.exists():
         raise FileNotFoundError(f"Run2 config not found: {config_path}")
     cfg = _load_json(config_path)
-    lb = cfg.get("livebench") or {}
+    lb = cfg.get("camoclaw") or {}
     data_path_str = (lb.get("data_path") or "").strip()
     if not data_path_str:
-        raise ValueError("livebench.data_path missing in run2 config")
+        raise ValueError("camoclaw.data_path missing in run2 config")
     data_path = Path(data_path_str.replace("/", os.sep))
     if not data_path.is_absolute():
         data_path = _project_root / data_path
@@ -647,7 +647,7 @@ def _prepare_run2_rerun(run_dir: Path) -> Path:
     all_candidates = [feedback_skill] + learn_entries
     if str(_project_root) not in sys.path:
         sys.path.insert(0, str(_project_root))
-    from livebench.skill.agent_skill_store import AgentSkillStore
+    from camoclaw.skill.agent_skill_store import AgentSkillStore
     store = AgentSkillStore(str(agent_path))
     store.write_candidates(all_candidates)
     print(f"   Loaded {len(all_candidates)} skill(s) from Run1 feedback + Learn -> {new_dir_name}/skill/candidates.jsonl (only used skills will be retained)")
@@ -659,7 +659,7 @@ def _prepare_run2_rerun(run_dir: Path) -> Path:
     else:
         new_data_path = new_data_path + f"_{suffix}"
     cfg_rerun = json.loads(config_path.read_text(encoding="utf-8"))
-    lb_rerun = cfg_rerun.setdefault("livebench", {})
+    lb_rerun = cfg_rerun.setdefault("camoclaw", {})
     lb_rerun["data_path"] = new_data_path
     ts = lb_rerun.get("task_source") or {}
     tasks = ts.get("tasks") or []
@@ -872,7 +872,7 @@ def promote_to_agent_store(
         path = (repo_root / path).resolve()
     else:
         path = path.resolve()
-    from livebench.skill.agent_skill_store import AgentSkillStore
+    from camoclaw.skill.agent_skill_store import AgentSkillStore
     store = AgentSkillStore(str(path))
     for s in promoted_skills:
         store.add_skill(
@@ -909,7 +909,7 @@ def run_evolution_for_task(
     signature = getattr(agent, "signature", "") or ""
     run_id = f"{_safe_slug(signature, 20)}_{date}_{_safe_slug(task_id, 12)}_{time.strftime('%H%M%S')}"
 
-    iso_root = _project_root / "livebench" / "data" / "single_task_debug" / "runs" / run_id
+    iso_root = _project_root / "camoclaw" / "data" / "single_task_debug" / "runs" / run_id
     iso_root.mkdir(parents=True, exist_ok=True)
     configs_dir = iso_root / "configs"
     configs_dir.mkdir(parents=True, exist_ok=True)
@@ -919,7 +919,7 @@ def run_evolution_for_task(
     # Sanitize task so numpy ndarray (e.g. reference_files from parquet) is JSON-serializable.
     task_clean = _jsonify_any(dict(task))
     base_cfg = _load_json(Path(config_path))
-    lb = (base_cfg.get("livebench") or {}).copy()
+    lb = (base_cfg.get("camoclaw") or {}).copy()
     lb["agents"] = [{"signature": signature, "basemodel": getattr(agent, "basemodel", ""), "enabled": True}]
     lb["date_range"] = {"init_date": date, "end_date": date}
     task_source_path = str(Path(config_path).resolve().parent) if config_path else ""
@@ -929,9 +929,9 @@ def run_evolution_for_task(
         "tasks": [task_clean],
     }
     lb["data_path"] = str((iso_root / "run1").as_posix())
-    stub1 = {"livebench": lb}
+    stub1 = {"camoclaw": lb}
 
-    lb2 = (base_cfg.get("livebench") or {}).copy()
+    lb2 = (base_cfg.get("camoclaw") or {}).copy()
     lb2["agents"] = [{"signature": signature, "basemodel": getattr(agent, "basemodel", ""), "enabled": True}]
     lb2["date_range"] = {"init_date": date, "end_date": date}
     task_run2 = {**task_clean, "prompt": _RUN2_INTRO + _RUN2_TASK_HEADER + str(task_clean.get("prompt") or "").strip()}
@@ -941,7 +941,7 @@ def run_evolution_for_task(
     run2_task_source_path = str(ref_base)
     lb2["task_source"] = {"type": "inline", "path": run2_task_source_path, "tasks": [task_run2]}
     lb2["data_path"] = str((iso_root / "run2").as_posix())
-    stub2 = {"livebench": lb2}
+    stub2 = {"camoclaw": lb2}
 
     run1_input = configs_dir / "run1_input.json"
     run2_input = configs_dir / "run2_input.json"
@@ -967,7 +967,7 @@ def run_evolution_for_task(
     print(f"   📚 LEARN PHASE — 学习阶段 [{date}]（基于 Run1 反馈产出技能文档）")
     print("=" * 60)
     print(f"   [evolution] Running Learn for task {task_id} (run_id={run_id})")
-    rc_learn = _run_livebench(learn_cfg_path)
+    rc_learn = _run_camoclaw(learn_cfg_path)
     print("=" * 60)
     print(f"   📚 LEARN PHASE END [{date}]\n")
     if rc_learn != 0:
@@ -989,7 +989,7 @@ def run_evolution_for_task(
     print(f"   🔄 RUN2 PHASE — 第二轮任务 [{date}]（带技能候选，同任务再跑一次）")
     print("=" * 60)
     print(f"   [evolution] Running Run2 for task {task_id}")
-    rc_run2 = _run_livebench(configs_dir / "run2.json")
+    rc_run2 = _run_camoclaw(configs_dir / "run2.json")
     print("=" * 60)
     print(f"   🔄 RUN2 PHASE END [{date}]\n")
     if rc_run2 != 0:
@@ -1288,7 +1288,7 @@ def _write_skill_to_run2(run2: RunConfig, skill: Dict[str, Any]) -> Dict[str, An
     if str(repo_root) not in sys.path:
         sys.path.insert(0, str(repo_root))
 
-    from livebench.skill.agent_skill_store import AgentSkillStore
+    from camoclaw.skill.agent_skill_store import AgentSkillStore
 
     store = AgentSkillStore(str(run2.agent_path))
     return store.add_skill(
@@ -1305,7 +1305,7 @@ def _write_candidates_to_run2(run2: RunConfig, entries: List[Dict[str, Any]]) ->
     if str(repo_root) not in sys.path:
         sys.path.insert(0, str(repo_root))
 
-    from livebench.skill.agent_skill_store import AgentSkillStore
+    from camoclaw.skill.agent_skill_store import AgentSkillStore
 
     store = AgentSkillStore(str(run2.agent_path))
     store.write_candidates(entries)
@@ -1383,7 +1383,7 @@ def _promote_used_candidates_to_formal(
     if str(repo_root) not in sys.path:
         sys.path.insert(0, str(repo_root))
 
-    from livebench.skill.agent_skill_store import AgentSkillStore
+    from camoclaw.skill.agent_skill_store import AgentSkillStore
 
     store = AgentSkillStore(str(run2.agent_path))
     promoted: List[Dict[str, Any]] = []
@@ -1427,16 +1427,16 @@ def _make_isolated_configs(
     cfg1 = _load_json(config_run1)
     cfg2 = _load_json(config_run2)
 
-    lb1 = cfg1.get("livebench") or {}
-    lb2 = cfg2.get("livebench") or {}
+    lb1 = cfg1.get("camoclaw") or {}
+    lb2 = cfg2.get("camoclaw") or {}
 
     base1 = Path(lb1.get("data_path") or "").as_posix()
     base2 = Path(lb2.get("data_path") or "").as_posix()
     if not base1 or not base2:
-        raise ValueError("Both configs must set livebench.data_path")
+        raise ValueError("Both configs must set camoclaw.data_path")
 
-    # Put isolated data under livebench/data/single_task_debug/runs/<run_id>/
-    iso_root = Path("livebench") / "data" / "single_task_debug" / "runs" / run_id
+    # Put isolated data under camoclaw/data/single_task_debug/runs/<run_id>/
+    iso_root = Path("camoclaw") / "data" / "single_task_debug" / "runs" / run_id
     lb1["data_path"] = str((iso_root / "run1").as_posix())
     lb2["data_path"] = str((iso_root / "run2").as_posix())
 
@@ -1494,8 +1494,8 @@ def _make_isolated_configs(
                 ts["tasks"] = [task]
                 lb["task_source"] = ts
 
-    cfg1["livebench"] = lb1
-    cfg2["livebench"] = lb2
+    cfg1["camoclaw"] = lb1
+    cfg2["camoclaw"] = lb2
 
     out_dir = iso_root / "configs"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -1510,13 +1510,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Single-task debug loop for skill self-evolution (decoupled)")
     parser.add_argument(
         "--config-run1",
-        default=str(Path("livebench") / "configs" / "single_task_debug_run1.json"),
-        help="Path to Run #1 config (default: livebench/configs/single_task_debug_run1.json)",
+        default=str(Path("camoclaw") / "configs" / "single_task_debug_run1.json"),
+        help="Path to Run #1 config (default: camoclaw/configs/single_task_debug_run1.json)",
     )
     parser.add_argument(
         "--config-run2",
-        default=str(Path("livebench") / "configs" / "single_task_debug_run2.json"),
-        help="Path to Run #2 config (default: livebench/configs/single_task_debug_run2.json)",
+        default=str(Path("camoclaw") / "configs" / "single_task_debug_run2.json"),
+        help="Path to Run #2 config (default: camoclaw/configs/single_task_debug_run2.json)",
     )
     parser.add_argument(
         "--threshold",
@@ -1526,7 +1526,7 @@ def main() -> int:
     )
     parser.add_argument(
         "--output",
-        default=str(Path("livebench") / "data" / "single_task_debug" / "diff_summary.json"),
+        default=str(Path("camoclaw") / "data" / "single_task_debug" / "diff_summary.json"),
         help="Where to write diff summary JSON",
     )
     parser.add_argument(
@@ -1580,7 +1580,7 @@ def main() -> int:
             return 1
         print(f"Re-running Run2 only for: {run_dir} (output -> run2_rerun/)")
         rerun_config_path = _prepare_run2_rerun(run_dir)
-        rc = _run_livebench(rerun_config_path)
+        rc = _run_camoclaw(rerun_config_path)
         print(f"Run2 finished with return code: {rc}")
         return rc
 
@@ -1605,10 +1605,10 @@ def main() -> int:
     if config1.task_id != config2.task_id or config1.date != config2.date:
         raise ValueError("Run #1 and Run #2 must use the same task_id and date")
     if config1.data_path_root == config2.data_path_root:
-        raise ValueError("Run #1 and Run #2 must use different livebench.data_path (for isolation)")
+        raise ValueError("Run #1 and Run #2 must use different camoclaw.data_path (for isolation)")
 
     # Run #1
-    rc1 = _run_livebench(config1.config_path)
+    rc1 = _run_camoclaw(config1.config_path)
     run1_result = _extract_run_result(config1)
 
     evolve_reason: Optional[str] = None
@@ -1666,7 +1666,7 @@ def main() -> int:
         print("\n" + "=" * 60)
         print(f"   📚 LEARN PHASE — 学习阶段 [{config1.date}]（基于 Run1 反馈产出技能文档）")
         print("=" * 60)
-        learn_run_return_code = _run_livebench(learn_cfg_path)
+        learn_run_return_code = _run_camoclaw(learn_cfg_path)
         print("=" * 60)
         print(f"   📚 LEARN PHASE END [{config1.date}]\n")
 
@@ -1689,7 +1689,7 @@ def main() -> int:
         print("\n" + "=" * 60)
         print(f"   🔄 RUN2 PHASE — 第二轮任务 [{_date}]（带技能候选，同任务再跑一次）")
         print("=" * 60)
-        rc2 = _run_livebench(config2.config_path)
+        rc2 = _run_camoclaw(config2.config_path)
         print("=" * 60)
         print(f"   🔄 RUN2 PHASE END [{_date}]\n")
         run2_result = _extract_run_result(config2)

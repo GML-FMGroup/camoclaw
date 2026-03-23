@@ -1,5 +1,5 @@
 {
-  "livebench": {
+  "camoclaw": {
     "date_range": {
       "init_date": "2025-01-20",
       "end_date": "2025-01-31"

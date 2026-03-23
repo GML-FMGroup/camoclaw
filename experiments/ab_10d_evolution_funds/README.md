@@ -38,11 +38,11 @@ Open and edit `task_ids_10.json`, replace placeholders with real GDPVal task IDs
 2. **Sync to A/B configs**: Copy the `task_ids` array from `task_ids_10.json` **as-is** into `agents[0].task_assignment.task_ids` in both `configs/A_showcase_10d_evolve_on.json` and `configs/B_showcase_10d_no_learn.json`, ensuring A and B have **identical** task sequences.
 3. **Run Group A** (evolution on):
    ```powershell
-   python livebench/main.py experiments/ab_10d_evolution_funds/configs/A_showcase_10d_evolve_on.json
+   python camoclaw/main.py experiments/ab_10d_evolution_funds/configs/A_showcase_10d_evolve_on.json
    ```
 4. **Run Group B** (evolution off):
    ```powershell
-   python livebench/main.py experiments/ab_10d_evolution_funds/configs/B_showcase_10d_no_learn.json
+   python camoclaw/main.py experiments/ab_10d_evolution_funds/configs/B_showcase_10d_no_learn.json
    ```
 5. **Plot**: Use `scripts/plot_ab_showcase_github_style.py` to generate comparison figures (configure A/B `data_path` or `signature` as needed).
 
@@ -84,8 +84,8 @@ Weekends are skipped automatically; `task_assignment.task_ids` is consumed in or
 From the project root:
 
 ```powershell
-python livebench/main.py experiments/ab_10d_evolution_funds/configs/A_showcase_10d_evolve_on.json
-python livebench/main.py experiments/ab_10d_evolution_funds/configs/B_showcase_10d_no_learn.json
+python camoclaw/main.py experiments/ab_10d_evolution_funds/configs/A_showcase_10d_evolve_on.json
+python camoclaw/main.py experiments/ab_10d_evolution_funds/configs/B_showcase_10d_no_learn.json
 ```
 
 ---
@@ -107,11 +107,11 @@ If you need **strict daily work** (regardless of agent choice), consider adding 
 
 Core data for each group:
 
-`livebench/data/agent_data/<signature>/economic/`
+`camoclaw/data/agent_data/<signature>/economic/`
 
 and:
 
-`livebench/data/agent_data/<signature>/economic/task_completions.jsonl`
+`camoclaw/data/agent_data/<signature>/economic/task_completions.jsonl`
 
 Extract per working day:
 
